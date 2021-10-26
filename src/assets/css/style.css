@@ -2328,3 +2328,55 @@ input:-internal-autofill-selected {
     font-size: 18px;
     color: black;
 }
+
+.invite-container {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.invite-container h3 {
+    color: white;
+    font-size: 22px;
+}
+
+.invite-container p {
+    color: white;
+    font-size: 14px;
+    margin: 1em 0;
+}
+
+.invite-main {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 20px;
+}
+
+.invite-main h4 {
+    font-size: 18px;
+}
+
+.invite-main>div {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 0;
+}
+
+.invite-main>div:nth-child(2) {
+    border-bottom: 1px solid #707070;
+}
+
+.invite-main>div div {
+    width: 16.666666%;
+    cursor: pointer;
+}
+.invite-main>div div img {
+    width: 80%;
+}
+
+.invite-main>div div p {
+    color: black;
+    margin: 0;
+    font-size: 11px;
+    white-space: nowrap;
+}

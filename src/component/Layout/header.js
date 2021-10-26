@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 const en = {
     mypage:"My page",
     logout:"Sign out",
-    send:"Send",
-    intro:"Introduce",
+    intro:"Invite",
 }
 
 const jp = {
     mypage:"マイページ",
     logout:"ログアウト",
-    send:"保存する",
     intro:"友達紹介",
 }
 
@@ -32,22 +30,6 @@ class Header extends Component{
         else {
             this.setState({maxHeight:menu.scrollHeight + 'px'});
         }
-    }
-
-    introClick = e => {
-        var modal = document.getElementById('intro-modal');
-        if (!modal.classList.contains('intro-modal-show'))
-            modal.classList.add('intro-modal-show')
-    }
-
-    modalClose = e => {
-        var modal = document.getElementById('intro-modal');
-        if (modal.classList.contains('intro-modal-show'))
-            modal.classList.remove('intro-modal-show')
-    }
-
-    modalMain = e=> {
-        e.stopPropagation()
     }
 
     handleLogout = e =>{
@@ -72,7 +54,7 @@ class Header extends Component{
                         </svg>
                     </button>}
                     {this.props.Intro!=null &&
-                    <a className="introduce" onClick={this.introClick}>{eval(language).intro}</a>
+                    <a className="introduce" href="/invite">{eval(language).intro}</a>
                     }
                     <h3>{this.props.pageName}</h3>
                     <div className={this.state.toggle ? "menu_icon change" : "menu_icon"} onClick={this.menu_click}>
@@ -86,17 +68,6 @@ class Header extends Component{
                     </div>
                 </div>
             </header>
-            {this.props.Intro!=null &&
-                <div id="intro-modal" onClick={this.modalClose}>
-                    <div className="container">
-                        <div className="intro-modal-body" onClick={this.modalMain}>
-                            <h3>{eval(language).intro}</h3>
-                            <input type="email" required />
-                            <button>{eval(language).send}</button>
-                        </div>
-                    </div>
-                </div>
-            }
             </>
         )
     }
