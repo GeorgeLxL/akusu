@@ -143,7 +143,7 @@ class Home extends Component{
                 <div className="top-content-spec top-main-link">
                     <div className="top-link-container">
                         <div className="top-link">
-                            <a href="/realEstate"><img src="./assets/image/top-link1.png" alt="" /></a>
+                            <a href="/eventList"><img src="./assets/image/top-link1.png" alt="" /></a>
                             <p>{eval(language).real_estate}</p>
                         </div>
                         <div className="top-link">
@@ -151,7 +151,7 @@ class Home extends Component{
                             <p>{eval(language).money}</p>
                         </div>
                         <div className="top-link">
-                            <a href="/eventList">
+                            <a href="/store">
                                 <img src="./assets/image/top-link3.png" alt="" />
                                 {newEventNum!==0 && <div>{newEventNum}</div>}
                             </a>

@@ -23,8 +23,8 @@ import SendPoint from './component/SendPoint';
 import Points from './component/Points';
 import Notifications from './component/Notifications';
 import EmailVerify from './component/EmailVerify';
-import RealEstate from './component/RealEstate';
-import RealEstateDetail from './component/RealEstateDetail';
+import Store from './component/Store';
+import StoreDetail from './component/StoreDetail';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -58,11 +58,11 @@ class Routes extends React.Component {
                 {userData ? <Route exact path='/sendPoint' component={SendPoint} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/points' component={Points} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/notifications' component={Notifications} /> : <Redirect to="/login" />}
-                {userData ? <Route exact path='/realEstate' component={RealEstate} /> : <Redirect to="/login" />}
-                <Route exact path='/realEstate/company'>
-                  {userData?<Redirect to="/realEstate/company/list" />:<Redirect to="/"/>}
+                {userData ? <Route exact path='/store' component={Store} /> : <Redirect to="/login" />}
+                <Route exact path='/store/company'>
+                  {userData?<Redirect to="/store/company/list" />:<Redirect to="/"/>}
                 </Route>
-                {userData ? <Route exact path='/realEstate/company/*' component={RealEstateDetail} /> : <Redirect to="/login" />}
+                {userData ? <Route exact path='/store/company/*' component={StoreDetail} /> : <Redirect to="/login" />}
             </Switch>
         </Router>
  

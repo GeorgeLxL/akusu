@@ -10,15 +10,8 @@ const en = {
     user_name:"User name",
     user_type:"User type",
     points:"Points",
-    real_estate:"Real Estate",
-    usertypes:['Individual', 'Company', 'Administrator', 'Introducer A', 'Introducer B','Introducer C'],
-    buy_title:"Buy property",
-    name:"Full name",
-    phone_number:"Phone number",
-    email:"Email address",
-    address:"Address",
-    send:"Send",
-    area:"Area choice",
+    store:"Store",
+    usertypes:['Individual', 'Company', 'Administrator', 'Introducer A', 'Introducer B','Introducer C']
 }
 
 const jp ={
@@ -26,18 +19,11 @@ const jp ={
     user_name:"ユーザー名",
     user_type:"会員種類",
     points:"保有ポイント",
-    real_estate:"不動産",
-    usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C'],
-    buy_title:"物件を買いたい人",
-    name:"氏名",
-    phone_number:"電話番号",
-    email:"メールアドレス",
-    address:"住所",
-    send:"保存する",
-    area:"ご希望の地域"
+    store:"店舗売買",
+    usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C']
 }
 
-class RealEstateBuy extends Component{   
+class Store extends Component{
     constructor(props) {
         super(props);
         this.state={
@@ -111,41 +97,45 @@ class RealEstateBuy extends Component{
         const {loading, language, userName, userPoint, userType, avartar, newEventNum} = this.state
         return(
         <>
-            <div className="real-container1">
-                <div className="real-title"><h3>{eval(language).buy_title}</h3></div>
-                <div className="real-sale-container">
-                    <form>
-                        <div className="real-sale-input">
-                            <label>{eval(language).name}</label>
-                            <input type="text" required />
-                        </div>
-                        <div className="real-sale-input">
-                            <label>{eval(language).phone_number}</label>
-                            <input type="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
-                        </div>
-                        <div className="real-sale-input">
-                            <label>{eval(language).email}</label>
-                            <input type="email" required />
-                        </div>
-                        <div className="real-sale-input">
-                            <label>{eval(language).address}</label>
-                            <input type="text" required />
-                        </div>
-                        <div className="real-sale-input">
-                            <label>{eval(language).area}</label>
-                            <select>
-                                <option>那覇市</option>
-                            </select>
-                        </div>
-                        <div className="real-sale-input">
-                            <input type="submit" value={eval(language).send} />
-                        </div>
-                    </form>
+            <div className="container">
+                <Header notback={false} pageName={eval(language).store}/>
+                <div className="top-profile">
+                    <div className="top-profile-img">
+                        <img src={avartar ? `${baseurl}/media/${avartar}`: './assets/image/avatar.svg'} alt="" />
+                    </div>
+                    <table className="top-profile-table">
+                        <tbody>
+                            <tr>
+                                <td>{eval(language).user_name}</td>
+                                <td>{userName}</td>
+                            </tr>
+                            <tr>
+                                <td>{eval(language).user_type}</td>
+                                <td>{eval(language).usertypes[userType]}</td>
+                            </tr>
+                            <tr>
+                                <td>{eval(language).points}</td>
+                                <td>{userPoint}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <div className="crumb">
+                    <p><a href="/home">{eval(language).home}</a> &#62; {eval(language).store}</p>
+                </div>
+                <div className="real-container1">
+                    <a href="/store/company" className="real-link">居抜きBank.com</a>
+                    <a href="/store/company" className="real-link">居抜きBank.com</a>
+                    <a href="/store/company" className="real-link">居抜きBank.com</a>
+                </div>
+                <Footer/>
             </div>
+            {loading &&
+                <Preloader/>
+            }
         </>
         )
     }
 }
 
-export default RealEstateBuy
+export default Store

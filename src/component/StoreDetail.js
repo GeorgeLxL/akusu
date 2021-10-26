@@ -4,10 +4,10 @@ import Footer from './Layout/footer';
 import Header from './Layout/header';
 import axios from 'axios';
 import Preloader from './Layout/preloader'
-import RealEstateList from './RealEstateList';
-import RealEstateSale from './RealEstateSale';
-import RealEstateBuy from './RealEstateBuy';
-import RealEstateGuide from './RealEstateGuide';
+import StoreList from './StoreList';
+import StoreSale from './StoreSale';
+import StoreBuy from './StoreBuy';
+import StoreGuide from './StoreGuide';
 
 const baseurl = process.env.REACT_APP_API_BASE_URL;
 const en = {
@@ -15,7 +15,7 @@ const en = {
     user_name:"User name",
     user_type:"User type",
     points:"Points",
-    real_estate:"Real Estate",
+    store:"Store",
     usertypes:['Individual', 'Company', 'Administrator', 'Introducer A', 'Introducer B','Introducer C'],
     property_list:"Property<br />list",
 }
@@ -25,12 +25,12 @@ const jp ={
     user_name:"ユーザー名",
     user_type:"会員種類",
     points:"保有ポイント",
-    real_estate:"不動産",
+    store:"店舗売買",
     usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C'],
     property_list:"物件<br />一覧",
 }
 
-class RealEstateDetail extends Component{   
+class StoreDetail extends Component{   
     constructor(props) {
         super(props);
         this.state={
@@ -105,7 +105,7 @@ class RealEstateDetail extends Component{
         return(
         <>
             <div className="container">
-                <Header notback={false} pageName={eval(language).real_estate}/>
+                <Header notback={false} pageName={eval(language).store}/>
                 <div className="top-profile">
                     <div className="top-profile-img">
                         <img src={avartar ? `${baseurl}/media/${avartar}`: '/assets/image/avatar.svg'} alt="" />
@@ -128,21 +128,21 @@ class RealEstateDetail extends Component{
                     </table>
                 </div>
                 <div className="crumb">
-                    <p><a href="/home">{eval(language).home}</a> &#62; <a href="/realEstate">{eval(language).real_estate}</a> &#62; 居抜きBank.com &#62; </p>
+                    <p><a href="/home">{eval(language).home}</a> &#62; <a href="/store">{eval(language).store}</a> &#62; 居抜きBank.com &#62; </p>
                 </div>
                 <div className="real-container1">
                     <div className="real-detail-link">
-                        <a href="/realEstate/company/list" className={activeTab=="list" ? "current" : ""}>物件<br />一覧</a>
-                        <a href="/realEstate/company/sale" className={activeTab=="sale" ? "current" : ""}>物件を<br />売る</a>
-                        <a href="/realEstate/company/buy" className={activeTab=="buy" ? "current" : ""}>物件を<br />買う</a>
-                        <a href="/realEstate/company/guide" className={activeTab=="guide" ? "current" : ""}>初めての<br />方へ</a>
+                        <a href="/store/company/list" className={activeTab=="list" ? "current" : ""}>物件<br />一覧</a>
+                        <a href="/store/company/sale" className={activeTab=="sale" ? "current" : ""}>物件を<br />売る</a>
+                        <a href="/store/company/buy" className={activeTab=="buy" ? "current" : ""}>物件を<br />買う</a>
+                        <a href="/store/company/guide" className={activeTab=="guide" ? "current" : ""}>初めての<br />方へ</a>
                     </div>
                 </div>
                 <Switch>
-                      <Route exact path='/realEstate/company/list' component={RealEstateList} />
-                      <Route exact path='/realEstate/company/sale' component={RealEstateSale} />
-                      <Route exact path='/realEstate/company/buy' component={RealEstateBuy} />
-                      <Route exact path='/realEstate/company/guide' component={RealEstateGuide} />
+                      <Route exact path='/store/company/list' component={StoreList} />
+                      <Route exact path='/store/company/sale' component={StoreSale} />
+                      <Route exact path='/store/company/buy' component={StoreBuy} />
+                      <Route exact path='/store/company/guide' component={StoreGuide} />
                 </Switch> 
                 <Footer/>
             </div>
@@ -154,4 +154,4 @@ class RealEstateDetail extends Component{
     }
 }
 
-export default RealEstateDetail
+export default StoreDetail

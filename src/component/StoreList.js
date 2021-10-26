@@ -12,7 +12,7 @@ const en = {
     user_name:"User name",
     user_type:"User type",
     points:"Points",
-    real_estate:"Real Estate",
+    store:"Store",
     usertypes:['Individual', 'Company', 'Administrator', 'Introducer A', 'Introducer B','Introducer C'],
     property_list:"Property list",
     featured_property:"Featured Property!!",
@@ -23,13 +23,13 @@ const jp ={
     user_name:"ユーザー名",
     user_type:"会員種類",
     points:"保有ポイント",
-    real_estate:"不動産",
+    store:"店舗売買",
     usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C'],
     property_list:"物件一覧",
     featured_property:"注目物件!!"
 }
 
-class RealEstateList extends Component{   
+class StoreList extends Component{   
     constructor(props) {
         super(props);
         this.state={
@@ -193,4 +193,4 @@ class RealEstateList extends Component{
     }
 }
 
-export default RealEstateList
+export default StoreList
