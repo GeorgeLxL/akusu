@@ -118,7 +118,7 @@ class Home extends Component{
         return(
         <>
             <div className="container">
-                <Header notback={true} pageName={eval(language).home}/>
+                <Header notback={true} Intro={true} pageName={eval(language).home}/>
                 <div className="top-profile">
                     <div className="top-profile-img">
                         <img src={avartar ? `${baseurl}/media/${avartar}`: './assets/image/avatar.svg'} alt="" />

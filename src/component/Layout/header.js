@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 
 const en = {
     mypage:"My page",
-    logout:"Sign out"
+    logout:"Sign out",
+    send:"Send",
+    intro:"Introduce",
 }
 
 const jp = {
     mypage:"マイページ",
-    logout:"ログアウト"
+    logout:"ログアウト",
+    send:"保存する",
+    intro:"友達紹介",
 }
 
 class Header extends Component{
@@ -30,6 +34,21 @@ class Header extends Component{
         }
     }
 
+    introClick = e => {
+        var modal = document.getElementById('intro-modal');
+        if (!modal.classList.contains('intro-modal-show'))
+            modal.classList.add('intro-modal-show')
+    }
+
+    modalClose = e => {
+        var modal = document.getElementById('intro-modal');
+        if (modal.classList.contains('intro-modal-show'))
+            modal.classList.remove('intro-modal-show')
+    }
+
+    modalMain = e=> {
+        e.stopPropagation()
+    }
 
     handleLogout = e =>{
         localStorage.removeItem("userData");
@@ -43,7 +62,7 @@ class Header extends Component{
     render(){
         const {language} = this.state;
         return(
-
+            <>
             <header>
                 <div className="content">
                     {!this.props.notback &&
@@ -52,6 +71,9 @@ class Header extends Component{
                             <path fillRule="evenodd" clipRule="evenodd" d="M10.0401 20.5802L0.790059 11.45C0.400059 11.06 0.400059 10.4401 0.790059 10.0501L10.0401 0.92C10.6001 0.36 11.51 0.36 12.08 0.92C12.64 1.47 12.64 2.38001 12.08 2.93001L4.17006 10.7501L12.08 18.5701C12.64 19.1201 12.64 20.0302 12.08 20.5802C11.51 21.1402 10.6001 21.1402 10.0401 20.5802Z" fill="#6F738D"/>
                         </svg>
                     </button>}
+                    {this.props.Intro!=null &&
+                    <a className="introduce" onClick={this.introClick}>{eval(language).intro}</a>
+                    }
                     <h3>{this.props.pageName}</h3>
                     <div className={this.state.toggle ? "menu_icon change" : "menu_icon"} onClick={this.menu_click}>
                         <div className="bar1"></div>
@@ -63,7 +85,19 @@ class Header extends Component{
                         <div onClick={this.handleLogout}><a>{eval(language).logout}</a></div>
                     </div>
                 </div>
-        </header>
+            </header>
+            {this.props.Intro!=null &&
+                <div id="intro-modal" onClick={this.modalClose}>
+                    <div className="container">
+                        <div className="intro-modal-body" onClick={this.modalMain}>
+                            <h3>{eval(language).intro}</h3>
+                            <input type="email" required />
+                            <button>{eval(language).send}</button>
+                        </div>
+                    </div>
+                </div>
+            }
+            </>
         )
     }
 }
