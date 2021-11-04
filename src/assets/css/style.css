@@ -386,6 +386,16 @@ input, select {
     font-size: 12px;
     line-height: 1.8;
 }
+.top-step-link a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: #009588;
+    color: white;
+    font-size: 20px;
+}
 .top-profile {
     background-color: #7FA835;
     padding: 15px 30px;
@@ -2379,4 +2389,52 @@ input:-internal-autofill-selected {
     margin: 0;
     font-size: 11px;
     white-space: nowrap;
+}
+.iframe-container {
+    overflow: hidden;
+    background-color: white;
+    height: 100%;
+}
+iframe {
+    width: calc(100% + 17px);
+    height: 100% !important;
+    border: none;
+    height: auto;
+    vertical-align: middle;
+    -webkit-overflow-scrolling: touch;
+}
+.prequestion-container {
+    color: white;
+    text-align: center;
+}
+.prequestion-container input {
+    color: black;
+    text-align: left;
+    width: 100%;
+    font-size: 13px;
+    padding: 5px;
+}
+.prequestion-container h3 {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.prequestion-container h4 {
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+.prequestion-input {
+    margin-bottom: 10px;
+}
+.prequestion-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 40px;
+    background-color: #689e39;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 40px auto 20px;
+    border-radius: 10px;
 }

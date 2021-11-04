@@ -141,13 +141,16 @@ class Home extends Component{
                     </table>
                 </div>
                 <div className="top-content-spec top-main-link">
+                    <div className="top-step-link">
+                        <a href="/prequestion">STEP1.アンケート記入</a>
+                    </div>
                     <div className="top-link-container">
                         <div className="top-link">
-                            <a href="/eventList"><img src="./assets/image/top-link1.png" alt="" /></a>
+                            <a href="/real_estate"><img src="./assets/image/top-link1.png" alt="" /></a>
                             <p>{eval(language).real_estate}</p>
                         </div>
                         <div className="top-link">
-                            <a href="/points"><img src="./assets/image/top-link2.png" alt="" /></a>
+                            <a href="/money_seminar"><img src="./assets/image/top-link2.png" alt="" /></a>
                             <p>{eval(language).money}</p>
                         </div>
                         <div className="top-link">
@@ -157,7 +160,7 @@ class Home extends Component{
                             </a>
                              <p>{eval(language).store_sale}</p>
                         </div>
-                        <div className="top-link">
+                        {/* <div className="top-link">
                             <a href="/comingsoon"><img src="./assets/image/top-link4.png" alt="" /></a>
                             <p>{eval(language).life}</p>
                         </div>
@@ -168,7 +171,7 @@ class Home extends Component{
                         <div className="top-link">
                             <a href="/comingsoon"><img src="./assets/image/top-link6.png" alt="" /></a>
                             <p>{eval(language).before_marriage}</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="top-content-spec">
