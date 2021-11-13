@@ -28,6 +28,8 @@ class Notifications extends Component{
 
     componentDidMount(){
         this.getNotification();
+        var chatContent = document.getElementsByClassName('chat-card-content')[0];
+        chatContent.scrlltop = chatContent.scrollHeight - chatContent.offsetHeight;
     }
 
     getNotification(){
@@ -101,7 +103,7 @@ class Notifications extends Component{
             <>
                 <div className="container" onScroll={this.handleScroll}>
                     <Header pageName="お知らせ"/>
-                    <div className="seminar-card-container" >
+                    <div className="" >
 
                         {notifications.map((notification, index)=>(
                             <div key={index}  className={notification.fields.readStatus ? "seminar-card" : "seminar-card unread"}>
@@ -109,6 +111,74 @@ class Notifications extends Component{
                             </div>
                         ))}
                             
+                    </div>
+                    <div className="notification-container">
+                        <div className="notification-card">
+                            <h3>お知らせ一覧</h3>
+                            <div className="notification-main-container">
+                                <div className="notification-main">
+                                    <p>2021/10/21</p>
+                                    <h4>お知らせお知らせお知らせお知らせお知らせお知らせお知らせ</h4>
+                                </div>
+                                <div className="notification-main">
+                                    <p>2021/10/21</p>
+                                    <h4>お知らせ</h4>
+                                </div>
+                                <div className="notification-main">
+                                    <p>2021/10/21</p>
+                                    <h4>お知らせ</h4>
+                                </div>
+                                <div className="notification-main">
+                                    <p>2021/10/21</p>
+                                    <h4>お知らせ</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="notification-container">
+                        <div className="chat-card">
+                            <div className="chat-card-content">
+                                <div className="chat-card-content1">
+                                    <div className="chat-inbox">
+                                        <img src="assets/image/top-profile-img.png" />
+                                        <p>abcdab adfa asd aasdfasdf asdff</p>
+                                    </div>
+                                    <div className="chat-outbox">
+                                        <p>お知らせ</p>
+                                    </div>
+                                    <div className="chat-inbox">
+                                        <img src="assets/image/top-profile-img.png" />
+                                        <p>abcdab adfa asd aasdfasdf asdff</p>
+                                    </div>
+                                    <div className="chat-outbox">
+                                        <p>お知らせ</p>
+                                    </div>
+                                    <div className="chat-inbox">
+                                        <img src="assets/image/top-profile-img.png" />
+                                        <p>abcdab adfa asd aasdfasdf asdff</p>
+                                    </div>
+                                    <div className="chat-outbox">
+                                        <p>お知らせ</p>
+                                    </div>
+                                    <div className="chat-inbox">
+                                        <img src="assets/image/top-profile-img.png" />
+                                        <p>abcdab adfa asd aasdfasdf asdff</p>
+                                    </div>
+                                    <div className="chat-unread">
+                                        <div></div>
+                                        <p>お知らせ</p>
+                                        <div></div>
+                                    </div>
+                                    <div className="chat-outbox">
+                                        <p>aasdfasdf</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="chat-input">
+                                <input type="text" />
+                                <button><img src="assets/image/top-foot-link2.png" /></button>
+                            </div>
+                        </div>
                     </div>
                     <Footer/>
                 </div>
