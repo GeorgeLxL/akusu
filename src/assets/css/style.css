@@ -2464,6 +2464,7 @@ input:-internal-autofill-selected {
     overflow: hidden;
     background-color: white;
     height: 100%;
+    height: calc(100% - 100px);
 }
 iframe {
     width: calc(100% + 17px);
