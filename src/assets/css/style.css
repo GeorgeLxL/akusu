@@ -102,28 +102,36 @@ input, select {
     background-color: white;
 }
 .circle1 {
-    -webkit-transform: rotateZ(0deg)
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
 }
 .circle2 {
-    -webkit-transform: rotateZ(45deg)
+    -webkit-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
 }
 .circle3 {
-    -webkit-transform: rotateZ(90deg)
+    -webkit-transform: rotateZ(90deg);
+    transform: rotateZ(90deg);
 }
 .circle4 {
-    -webkit-transform: rotateZ(135deg)
+    -webkit-transform: rotateZ(135deg);
+    transform: rotateZ(135deg);
 }
 .circle5 {
-    -webkit-transform: rotateZ(180deg)
+    -webkit-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
 }
 .circle6 {
-    -webkit-transform: rotateZ(225deg)
+    -webkit-transform: rotateZ(225deg);
+    transform: rotateZ(225deg);
 }
 .circle7 {
-    -webkit-transform: rotateZ(270deg)
+    -webkit-transform: rotateZ(270deg);
+    transform: rotateZ(270deg);
 }
 .circle8 {
-    -webkit-transform: rotateZ(315deg)
+    -webkit-transform: rotateZ(315deg);
+    transform: rotateZ(315deg);
 }
 .circle1 .counterrotate {
     animation: preload1 .8s linear infinite;
