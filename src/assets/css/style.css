@@ -2003,6 +2003,10 @@ input:-internal-autofill-selected {
     color: white;
 }
 
+.real-container {
+    padding: 20px;
+}
+
 .real-container1 {
     padding: 20px 20px 0 20px;
 }
@@ -2147,9 +2151,44 @@ input:-internal-autofill-selected {
 
 .real-sale-container {
     background-color: white;
-    padding: 20px;
+    padding: 1em;
     font-size: 14px;
 }
+
+.real-container3 .real-sale-container {
+    font-size: 13px
+}
+
+.real-sale-input-box {
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid #777777;
+}
+
+.real-sale-input-box1 {
+    padding: .5em .5em 0 .5em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.real-sale-input-box1 input {
+    padding: 5px;
+    border: 1px solid #EBE8E3;
+    width: 50%;
+    margin-right: 1em;
+}
+
+.real-sale-input-service {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    font-weight: bold;
+}
+
 .real-sale-input {
     margin-bottom: 20px;
 }
@@ -2162,14 +2201,24 @@ input:-internal-autofill-selected {
 
 .real-sale-type {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     margin-top: 5px;
+}
+
+.real-container3 .real-sale-type {
+    padding: 0 .5em;
 }
 
 .real-sale-type-select {
     position: relative;
-    padding-left: 20px;
+    padding-left: 1.3em;
+    margin-right: 1em;
+}
+
+.real-sale-type-select:last-child {
+    margin-right: 0;
 }
 
 .real-sale-type-select input {
@@ -2214,6 +2263,19 @@ input:-internal-autofill-selected {
     background-size: 12px 12px;
     background-repeat: no-repeat;
     background-position: 96% center;
+}
+
+.real-sale-submit {
+    background-color: #9abf11;
+    color: #fff59d;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 40px;
+    margin: 20px auto;
+    border-radius: 5px;
 }
 
 .real-guide-container {

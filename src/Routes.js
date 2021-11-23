@@ -61,7 +61,6 @@ class Routes extends React.Component {
                 {userData ? <Route exact path='/pointCharge' component={PointCharge} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/sendPoint' component={SendPoint} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/points' component={Points} /> : <Redirect to="/login" />}
-                {userData ? <Route exact path='/real_estate' component={RealEstate} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/money_seminar' component={MoneySeminar} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/notifications' component={Notifications} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/prequestion' component={PreQuestion} /> : <Redirect to ="/login"/>}
@@ -71,6 +70,10 @@ class Routes extends React.Component {
                   {userData?<Redirect to="/store/company/list" />:<Redirect to="/"/>}
                 </Route>
                 {userData ? <Route exact path='/store/company/*' component={StoreDetail} /> : <Redirect to="/login" />}
+                <Route exact path='/real_estate'>
+                  {userData?<Redirect to="/real_estate/list" />:<Redirect to="/"/>}
+                </Route>
+                {userData ? <Route exact path='/real_estate/*' component={RealEstate} /> : <Redirect to="/login" />}
             </Switch>
         </Router>
  

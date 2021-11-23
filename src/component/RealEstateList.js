@@ -1,14 +1,6 @@
 import { Component } from "react";
-import { Switch, Route } from 'react-router-dom';
-import Footer from './Layout/footer';
-import Header from './Layout/header';
 import axios from 'axios';
-import Preloader from './Layout/preloader';
-import RealEstateList from "./RealEstateList";
-import RealEstateSale from "./RealEstateSale";
-import RealEstateBuy from "./RealEstateBuy";
-import RealEstateGuide from "./RealEstateGuide";
-
+import Preloader from './Layout/preloader'
 const baseurl = process.env.REACT_APP_API_BASE_URL;
 const en = {
    
@@ -30,7 +22,7 @@ const jp ={
 
 }
 
-class RealEstate extends Component{
+class RealEstateList extends Component{
 
     constructor(props){
         super(props)
@@ -101,23 +93,8 @@ class RealEstate extends Component{
         const{activeTab,language,userPoint,loading} = this.state
         return(
             <>
-                <div className="container">
-                    <Header pageName="不動産​" />
-                    <div className="real-container">
-                        <div className="real-detail-link">
-                            <a href="/real_estate/list" className={activeTab=="list" ? "current" : ""}>物件<br />一覧</a>
-                            <a href="/real_estate/sale" className={activeTab=="sale" ? "current" : ""}>物件を<br />売る</a>
-                            <a href="/real_estate/buy" className={activeTab=="buy" ? "current" : ""}>物件を<br />買う</a>
-                            <a href="/real_estate/guide" className={activeTab=="guide" ? "current" : ""}>初めての<br />方へ</a>
-                        </div>
-                    </div>
-                        <Switch>
-                            <Route exact path='/real_estate/list' component={RealEstateList} />
-                            <Route exact path='/real_estate/sale' component={RealEstateSale} />
-                            <Route exact path='/real_estate/buy' component={RealEstateBuy} />
-                            <Route exact path='/real_estate/guide' component={RealEstateGuide} />
-                        </Switch>
-                    <Footer/>
+                <div className="iframe-container">
+                    <iframe src="https://zaizen-estate.co.jp/sell" title=""></iframe>
                 </div>
                 {loading && <Preloader/>}
             </>
@@ -125,4 +102,4 @@ class RealEstate extends Component{
     }
 }
 
-export default RealEstate
+export default RealEstateList
