@@ -40,7 +40,6 @@ class Store extends Component{
     componentDidMount()
     {
         var userData = JSON.parse(localStorage.userData);
-        console.log(userData)
         if(userData.userstatus===0)
         {
             this.props.history.push("/emailverify");

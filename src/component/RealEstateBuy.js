@@ -41,12 +41,17 @@ class RealEstateBuy extends Component{
     constructor(props) {
         super(props);
         this.state={
-           loading:true,
-           userName:"",
-           userType:"",
-           userPoint:0,
-           avartar:"",
            newEventNum:0,
+           type:0,
+           area:0,
+           size:0,
+           quatation:0,
+           selfMoney:0,
+           name:"",
+           phoneNumber:"",
+           emailAddress:"",
+           period:0,
+           agreement:false,
            language:JSON.parse(localStorage.language).language
         }
     }
@@ -54,7 +59,6 @@ class RealEstateBuy extends Component{
     componentDidMount()
     {
         var userData = JSON.parse(localStorage.userData);
-        console.log(userData)
         if(userData.userstatus===0)
         {
             this.props.history.push("/emailverify");
@@ -64,48 +68,38 @@ class RealEstateBuy extends Component{
         {
             this.props.history.push("/register");
         }
-        if(userData.userstatus===2)
-        {
-            this.getUserdata()
+    }
+    
+    handleSubmit = (event)=>{
+        event.preventDefault();
+        const {agreement, type, area, size, quatation, name, emailAddress, phoneNumber, period} = this.state
+        if(!agreement){
+            return;
         }
+        else{
+            this.setState({loading:true});
+            var userData = JSON.parse(localStorage.userData);
+            var token = userData.token
+            var data = JSON.stringify({"type":type,"area":area, "size":size , "quatation":quatation, "name":name, "emailAddress":emailAddress, "phoneNumber":phoneNumber, "period":period, "selfMoney":0, "buysell":1});
+            var config = {
+                method: 'post',
+                url: `${baseurl}/api/estimate/register`,
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + token,
+                },
+                data : data
+              };
+              axios(config)
+              .then((response)=>{
+                  this.props.history.push('/home')
+              })
+              .catch((error)=>{
+              });
+        }
+      
     }
 
-    getUserdata()
-    {
-        var userData = JSON.parse(localStorage.userData);
-        var token = userData.token
-        var config = {
-            method: 'get',
-            url: `${baseurl}/api/account/getProfile`,
-            headers: { 
-            'Authorization': 'Bearer ' + token,
-            },
-                data : {},
-        };
-        axios(config)
-        .then((response) => {
-            var userData = response.data.user;
-            var srcBase64 = userData.userAvatar;
-            this.setState({
-                loading:false,
-                userName: userData.userName,
-                userType:userData.userType,
-                userPoint: userData.userPoint,
-                avartar: srcBase64
-            })
-        })
-        .catch((error)=>{
-            this.setState({
-                loading:false
-            })
-            if (error.response) {
-                if(error.response.status===401){
-                    localStorage.removeItem("userData");
-                    window.location.assign('/');
-                }
-            }
-        })
-    }
 
     render(){  
         const {loading, language, userName, userPoint, userType, avartar, newEventNum} = this.state
@@ -113,48 +107,48 @@ class RealEstateBuy extends Component{
         <>
         <div className="real-container1 real-container3">
             <div className="real-title"><h3>{eval(language).buy_title}</h3></div>
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <div className="real-sale-container">
                     <div className="real-sale-input-box">
                         <h4>種目</h4>
                         <div className="real-sale-type">
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:0})}} checked={this.state.type===0}/>
                                 <span></span>
                                 土地
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:1})}} checked={this.state.type===1}/>
                                 <span></span>
                                 戸建
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:2})}} checked={this.state.type===2}/>
                                 <span></span>
                                 マンション
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:3})}} checked={this.state.type===3}/>
                                 <span></span>
                                 収益物件
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:4})}} checked={this.state.type===4}/>
                                 <span></span>
                                 ホテル
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:5})}} checked={this.state.type===5}/>
                                 <span></span>
                                 軍用地
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:6})}} checked={this.state.type===6}/>
                                 <span></span>
                                 ヤード
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-type" type="radio" />
+                                <input name="real-sale-type" type="radio" onClick={(e)=>{this.setState({type:7})}} checked={this.state.type===7}/>
                                 <span></span>
                                 農地
                             </label>
@@ -164,47 +158,47 @@ class RealEstateBuy extends Component{
                         <h4>エリア</h4>
                         <div className="real-sale-type">
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:0})}} checked={this.state.area===0}/>
                                 <span></span>
                                 県内全域
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:1})}} checked={this.state.area===1}/>
                                 <span></span>
                                 那覇市内
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:2})}} checked={this.state.area===2}/>
                                 <span></span>
                                 南部
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:3})}} checked={this.state.area===3}/>
                                 <span></span>
                                 中部
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:4})}} checked={this.state.area===4}/>
                                 <span></span>
                                 北部
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:5})}} checked={this.state.area===5}/>
                                 <span></span>
                                 各市町村
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:6})}} checked={this.state.area===6}/>
                                 <span></span>
                                 リゾート用地
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:7})}} checked={this.state.area===7}/>
                                 <span></span>
                                 県外
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-area" type="radio" />
+                                <input name="real-sale-area" type="radio" onClick={(e)=>{this.setState({area:8})}} checked={this.state.area===8}/>
                                 <span></span>
                                 その他
                             </label>
@@ -213,63 +207,63 @@ class RealEstateBuy extends Component{
                     <div className="real-sale-input-box">
                         <h4>㎡/坪</h4>
                         <div className="real-sale-input-box1">
-                            <input type="number"/>
+                            <input type="number" onChange={(e)=>{this.setState({size:e.target.value})}} value={this.state.size}/>
                             <span>坪</span>
                         </div>
                     </div>
                     <div className="real-sale-input-box">
                         <h4>希望予算</h4>
                         <div className="real-sale-input-box1">
-                            <input type="number"/>
+                            <input type="number" onChange={(e)=>{this.setState({quatation:e.target.value})}} value={this.state.quatation}/>
                             <span>円</span>
                         </div>
                     </div>
                     <div className="real-sale-input-box">
                         <h4>氏名</h4>
                         <div className="real-sale-input-box1">
-                            <input type="text"/>
+                            <input type="text" onChange={(e)=>{this.setState({name:e.target.value})}} value={this.state.name} />
                         </div>
                     </div>
                     <div className="real-sale-input-box">
                         <h4>TEL</h4>
                         <div className="real-sale-input-box1">
-                            <input type="tel"/>
+                            <input type="tel" onChange={(e)=>{this.setState({phoneNumber:e.target.value})}} value={this.state.phoneNumber}/>
                         </div>
                     </div>
                     <div className="real-sale-input-box">
                         <h4>メールアドレス</h4>
                         <div className="real-sale-input-box1">
-                            <input type="email"/>
+                            <input type="email" onChange={(e)=>{this.setState({emailAddress:e.target.value})}} value={this.state.emailAddress}/>
                         </div>
                     </div>
                     <div className="real-sale-input-box">
                         <h4>期日・見込</h4>
                         <div className="real-sale-type">
                             <label className="real-sale-type-select">
-                                <input name="real-sale-date" type="radio" />
+                                <input name="real-sale-date" type="radio" onClick={()=>{this.setState({period:0})}} checked={this.state.period==0}/>
                                 <span></span>
                                 3ヵ月以内
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-date" type="radio" />
+                                <input name="real-sale-date" type="radio" onClick={()=>{this.setState({period:1})}} checked={this.state.period==1}/>
                                 <span></span>
                                 半年以内
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-date" type="radio" />
+                                <input name="real-sale-date" type="radio" onClick={()=>{this.setState({period:2})}} checked={this.state.period==2}/>
                                 <span></span>
                                 1年以内
                             </label>
                             <label className="real-sale-type-select">
-                                <input name="real-sale-date" type="radio" />
+                                <input name="real-sale-date" type="radio" onClick={()=>{this.setState({period:3})}} checked={this.state.period==3}/>
                                 <span></span>
-                                査定希望
+                                いい物件があれば
                             </label>
                         </div>
                     </div>
                     <div className="real-sale-input-box real-sale-input-service">
                         <label className="real-sale-type-select">
-                            <input name="real-sale-date" type="checkbox" />
+                            <input name="real-sale-date" type="checkbox" checked={this.state.agreement} onClick={()=>{this.setState({agreement:!this.state.agreement})}}/>
                             <span></span>
                             利用規約に同意します。
                         </label>

@@ -1,8 +1,12 @@
 import { Component } from "react";
+import { Switch, Route } from 'react-router-dom';
 import Footer from './Layout/footer';
 import Header from './Layout/header';
 import axios from 'axios';
 import Preloader from './Layout/preloader'
+import MoneySeminarList from "./MoneySeminarList";
+import MoneySeminarRegister from "./MoneySeminarRegister";
+
 const baseurl = process.env.REACT_APP_API_BASE_URL;
 
 const en={
@@ -24,7 +28,8 @@ class MoneySeminar extends Component{
             eventList:[],
             offset:0,
             totalCount:0,
-            language:JSON.parse(localStorage.language).language
+            language:JSON.parse(localStorage.language).language,
+            activeTab:(window.location.pathname).split("/")[2],
         }
     }
 
@@ -87,19 +92,27 @@ class MoneySeminar extends Component{
 
     render()
     {
-        const {loading, eventList} = this.state
+        const {loading, eventList, activeTab} = this.state
         return(
             <>
                 <div className="container" onScroll={this.handleScroll}>
                     <Header pageName="お金のセミナー"/>
-                    <div>
+                    {/* <div>
                         <div className="seminar-card" style={{textAlign:'right'}}>
                             <button className="seminar-link seminar-link-brown"  onClick={(e)=>{window.location.assign("/addNewEvent")}} >追加する</button>
                         </div>
+                    </div> */}
+                    
+                    <div className="real-container">
+                        <div className="real-detail-link money-detail-link">
+                            <a href="/money_seminar/register" className={activeTab=="register" ? "current" : ""}>事前<br />登録</a>
+                            <a href="/money_seminar/list" className={activeTab=="list" ? "current" : ""}>セミナー<br />一覧</a>
+                        </div>
                     </div>
-                    <div className="iframe-container">
-                        <iframe src="https://otonanookane.com/"></iframe>
-                    </div>
+                    <Switch>
+                        <Route exact path='/money_seminar/register' component={MoneySeminarRegister} />
+                        <Route exact path='/money_seminar/list' component={MoneySeminarList} />
+                    </Switch>
                     <Footer/>
                 </div>
                 {loading &&
