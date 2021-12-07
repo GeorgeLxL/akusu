@@ -1,0 +1,7 @@
+{
+    "name": "Akushuapp",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }
