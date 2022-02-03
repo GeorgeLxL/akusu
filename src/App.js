@@ -139,6 +139,9 @@ function App() {
               "resize":true              //canvasのサイズにあらせて変更する
           }}
         />
+        <div className='main-logo'>
+        <img src="/assets/image/logo.png" />
+        </div>
         <Routes />
       </AppContext.Provider>
     </Elements>

@@ -29,6 +29,8 @@ import Invite from './component/Invite';
 import RealEstate from './component/RealEstate';
 import MoneySeminar from './component/MoneySeminar';
 import PreQuestion from './component/PreQuestion';
+import Scan from './component/Scan';
+import ScanReceive from './component/ScanReceive';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -65,6 +67,8 @@ class Routes extends React.Component {
                 {userData ? <Route exact path='/prequestion' component={PreQuestion} /> : <Redirect to ="/login"/>}
                 {userData ? <Route exact path='/invite' component={Invite} /> : <Redirect to="/login" />}
                 {userData ? <Route exact path='/store' component={Store} /> : <Redirect to="/login" />}
+                {userData ? <Route exact path='/scan' component={Scan} /> : <Redirect to="/login" />}
+                {userData ? <Route exact path='/scan/receive' component={ScanReceive} /> : <Redirect to="/login" />}
                 <Route exact path='/store/company'>
                   {userData?<Redirect to="/store/company/list" />:<Redirect to="/"/>}
                 </Route>

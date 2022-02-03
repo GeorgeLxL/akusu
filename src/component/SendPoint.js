@@ -24,7 +24,7 @@ class SendPoint extends Component{
     handlChangeSendPoint =  e =>{
         this.setState({
             sendpoint: e.target.value,
-            receivepoint:e.target.value * 0.973            
+            receivepoint:e.target.value * 0.973
         });
     }
 
@@ -105,8 +105,6 @@ class SendPoint extends Component{
                 }
             }
         })
-
-
     }
 
     render(){
@@ -114,42 +112,41 @@ class SendPoint extends Component{
 
         return(
             <>
-            <div className="container">
-               <Header pageName="ポイント送信"/>
-               
-                    <div className="seminar-card seminar-detail-card">
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="profile-input-box">
-                            <div className="profile-title">
-                                <h3>受信者メールアドレス</h3>
-                            </div>
-                            <div className="profile-input-container">
-                                <input style={{width:'100%'}} className="profile-input-input profile-input-input1" type="email" value={email} onChange={this.handleChange("email")} />
-                            </div>
-                            <span className="error">{error_receptance}</span>
-                        </div>
-                        <div className="profile-input-box">
-                            <div className="profile-title">
-                                <h3>ポイント</h3>
-                            </div>
-                            <div className="time-input-container">
-                                <div className="time-input-box">
-                                    <label >送信ポイント</label>
-                                    <input type="number" value={sendpoint} onChange={this.handlChangeSendPoint} />
+                <div className="container">
+                    <Header pageName="ポイント送信"/>
+                        <div className="seminar-card seminar-detail-card">
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="profile-input-box">
+                                <div className="profile-title">
+                                    <h3>受信者メールアドレス</h3>
                                 </div>
-                                <div className="time-input-box">
-                                    <label >受け取りポイント</label>
-                                    <input type="number" value={receivepoint} onChange={this.handleChangeReceive} />
+                                <div className="profile-input-container">
+                                    <input style={{width:'100%'}} className="profile-input-input profile-input-input1" type="email" value={email} onChange={this.handleChange("email")} />
                                 </div>
+                                <span className="error">{error_receptance}</span>
                             </div>
-                            <span className="error">{error_point}</span>
+                            <div className="profile-input-box">
+                                <div className="profile-title">
+                                    <h3>ポイント</h3>
+                                </div>
+                                <div className="time-input-container">
+                                    <div className="time-input-box">
+                                        <label >送信ポイント</label>
+                                        <input type="number" value={sendpoint} onChange={this.handlChangeSendPoint} />
+                                    </div>
+                                    <div className="time-input-box">
+                                        <label >受け取りポイント</label>
+                                        <input type="number" value={receivepoint} onChange={this.handleChangeReceive} />
+                                    </div>
+                                </div>
+                                <span className="error">{error_point}</span>
+                            </div>
+                    
+                            <div className="profile-input-upload event-input-upload">
+                                <button type="submit">送信</button>
+                            </div>
+                            </form>
                         </div>
-                
-                        <div className="profile-input-upload event-input-upload">
-                            <button type="submit">送信</button>
-                        </div>
-                        </form>
-                    </div>
                     <Footer/>
                 </div>
                 {loading && <Preloader/> }

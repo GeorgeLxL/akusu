@@ -153,7 +153,7 @@ class Login extends Component{
             <>
                 <div className="container container1">
                     <div className="main-title">
-                        <h1>AKUSHU</h1>
+                        <img src="/assets/image/logo.png" />
                         <h2>{eval(language).login}</h2>
                     </div>
                     <div className="login-form content">

@@ -178,7 +178,7 @@ class Home extends Component{
                     <div className="top-foot">
                         <div className="top-foot-main">
                             <div className="top-foot-main-link">
-                                <a href="/comingsoon">
+                                <a href="/scan">
                                     <div><img src="./assets/image/top-foot-link1.png" alt="" /></div>
                                     <p>{eval(language).scan}</p>
                                 </a>

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&family=Noto+Sans+JP:wght@400;700;900&display=swap');
 :root {
-    --main-brown: #374b11;
-    --main-green: #008E34;
+    --main-brown: #699c09;
+    --main-green: #22ff73;
     --main-back: #F1F1F1;
     --main-blue: #007AFF;
     --main-gray:#666666;
@@ -51,6 +51,23 @@ input, select {
     right: 0;
     left: 0;
     background-image: linear-gradient(to bottom, #2f5576, #484777);
+}
+
+.main-logo {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-logo img {
+    width: 95%;
+    max-width: 450px;
+    opacity: .5;
 }
 
 .container {
@@ -266,7 +283,7 @@ input, select {
 
 .main-title {
     text-align: center;
-    padding-top: 70px;
+    padding-top: 50px;
 }
 .main-title h1 {
     color: var(--main-green);
@@ -279,10 +296,11 @@ input, select {
     width: 250px;
 }
 .main-title h2 {
-    font-size: 32px;
+    font-size: 30px;
     color: var(--main-brown);
-    padding: 20px 0 30px;
+    padding: 10px 0 20px;
     letter-spacing: .1em;
+    color: #43ff88;
 }
 .main-link {
     margin-top: 50px;
@@ -525,7 +543,8 @@ input, select {
 
 
 .login-form {
-    color: black;
+    color: white;
+    padding-bottom: 40px;
 }
 .login-form h3 {
     font-size: 16px;
@@ -543,6 +562,7 @@ input, select {
     border: none;
     outline: none;
     background-color: transparent;
+    color: white;
     position: relative;
     z-index: 2;
 }
@@ -571,7 +591,7 @@ input, select {
     bottom: 0;
     left: 0;
     right: 0;
-    border-top: 2px solid #333333;
+    border-top: 2px solid #999999;
 }
 .login-input-box::after {
     position: absolute;
@@ -580,7 +600,7 @@ input, select {
     bottom: 0;
     left: 0;
     right: 0;
-    border-top: 2px solid #777777;
+    border-top: 2px solid white;
     transform: scale(0, 1);
     transform-origin: 0%;
     transition: transform .5s ease-in-out;
@@ -591,13 +611,12 @@ input, select {
 .login-input-focused .login-input-title {
     top: 2px;
     font-size: 11px;
-    color: black;
 }
 .login-checkbox {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 0;
+    padding: 20px 0;
 }
 .login-checkbox input {
     position: absolute;
@@ -609,13 +628,10 @@ input, select {
     height: 20px;
     background-color: transparent;
     border-radius: 4px;
-    border: 2px solid black;
+    border: 2px solid white;
     position: absolute;
     left: 0;
     top: 2px;
-}
-.login-checkbox input:checked ~ span {
-    background-color: black;
 }
 .login-checkbox span:after {
     content: "";
@@ -658,7 +674,7 @@ input, select {
     color: var(--main-brown);
 }
 .forgot-password {
-    padding: 30px 0;
+    padding: 20px 0;
     text-align: center;
     font-size: 17px;
     font-weight: bold;
@@ -673,11 +689,9 @@ input, select {
     font-weight: bold;
     letter-spacing: .04em;
     text-align: center;
-    color: black;
 }
 .login-checkbox a {
     text-decoration: underline;
-    color: black;
 }
 
 header {
@@ -862,9 +876,45 @@ footer a img {
     margin-top: 30px;
     color: black;
 }
-.privacy-p {
-    text-align: center;
-    padding: 25px 35px 35px;
+.privacy-content {
+    padding: 25px 20px 35px;
+}
+
+.privacy-content h4 {
+    margin-top: 1.8em;
+    margin-bottom: 1.4em;
+}
+
+.privacy-content ol {
+    padding-inline-start: 1em;
+}
+
+.privacy-content ol li {
+    margin-bottom: 1em;
+}
+
+.privacy-content ol li:last-child {
+    margin-bottom: 0;
+}
+
+.privacy-content ol ol li {
+    margin-bottom: 0;
+}
+
+.privacy-content-mb li {
+    margin-bottom: 0 !important;
+}
+
+.privacy-content-red {
+    color: #860422;
+}
+
+.privacy-content ul {
+    list-style-type: none;
+}
+
+.privacy-container {
+    background-color: rgba(255, 255, 255, .2);
 }
 
 /* top page */
@@ -2647,4 +2697,52 @@ iframe {
 .chat-input button img {
     width: 20px;
     filter: hue-rotate(.25turn);
+}
+
+.scan {
+    text-align: center;
+    color: white;
+    padding-top: 40px;
+}
+
+.scan h4 {
+    font-size: 1.1em;
+    margin: 1em 0;
+}
+
+.scan-qrcode-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+}
+
+.scan-qrcode-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.scan a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 1.3em;
+    font-weight: bold;
+    background-color: white;
+    height: 3em;
+    margin: 1.5em 0;
+}
+
+.scan .time-input-container {
+    margin-bottom: 1.5em;
+}
+
+.scan .error {
+    display: block;
+    margin-bottom: 1.5em;
 }
