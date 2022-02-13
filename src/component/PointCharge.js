@@ -4,13 +4,16 @@ import axios from 'axios';
 import Footer from './Layout/footer';
 import Header from './Layout/header';
 import Preloader from './Layout/preloader'
+import { setRangeValue } from 'tsparticles';
 
 const baseurl = process.env.REACT_APP_API_BASE_URL;
 const PointCharge = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const[amount, setAmount] = useState(0);
-  const[point, setPoint] = useState(0);
+  const [amount, setAmount] = useState('');
+  const [point, setPoint] = useState('');
+  const [value, setValue] = useState('')
+  const [value1, setValue1] = useState('')
   const [loading, setLoading] = useState(false);
   
   const handleSubmit = async (event) => {
@@ -36,7 +39,9 @@ const PointCharge = () => {
     setLoading(true);
     var userData = JSON.parse(localStorage.userData);
     var token = userData.token;
-    var data = JSON.stringify({stripetoken:stripetoken.id, amount:amount, point:point});
+    var amount1 = parseInt(amount.replace(/,/g, ''));
+    var point1 = parseInt(point.replace(/,/g, ''));
+    var data = JSON.stringify({stripetoken:stripetoken.id, amount:amount1, point:point1});
     var config = {
         method: 'POST',
         url: `${baseurl}/api/point/charge`,
@@ -65,13 +70,89 @@ const PointCharge = () => {
   }
 
   const handlChangePoint = (event)=>{
-    setPoint(event.target.value);
-    setAmount(event.target.value * 10)
+    setAmount(parseInt(parseInt(value) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    setPoint(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   }
   
   const handleChangeAmount = (event)=>{
-    setAmount(event.target.value);
-    setPoint(parseInt(event.target.value / 10));
+    setPoint(parseInt(parseInt(value1) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    setAmount(value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  }
+
+  const handlePointKeyPress = (e) => {
+    if (e.keyCode == 48 || e.keyCode == 96) {
+      setValue(value.toString() + '0')
+    }
+    if (e.keyCode == 49 || e.keyCode == 97) {
+      setValue(value.toString() + '1')
+    }
+    if (e.keyCode == 50 || e.keyCode == 98) {
+      setValue(value.toString() + '2')
+    }
+    if (e.keyCode == 51 || e.keyCode == 99) {
+      setValue(value.toString() + '3')
+    }
+    if (e.keyCode == 52 || e.keyCode == 100) {
+      setValue(value.toString() + '4')
+    }
+    if (e.keyCode == 53 || e.keyCode == 101) {
+      setValue(value.toString() + '5')
+    }
+    if (e.keyCode == 54 || e.keyCode == 102) {
+      setValue(value.toString() + '6')
+    }
+    if (e.keyCode == 55 || e.keyCode == 103) {
+      setValue(value.toString() + '7')
+    }
+    if (e.keyCode == 56 || e.keyCode == 104) {
+      setValue(value.toString() + '8')
+    }
+    if (e.keyCode == 57 || e.keyCode == 105) {
+      setValue(value.toString() + '9')
+    }
+    if (e.keyCode == 8) {
+      if (value != '') {
+        setValue(value.slice(0, -1));
+      }
+    }
+  }
+
+  const handleAmountKeyPress = (e) => {
+    if (e.keyCode == 48 || e.keyCode == 96) {
+      setValue1(value1.toString() + '0')
+    }
+    if (e.keyCode == 49 || e.keyCode == 97) {
+      setValue1(value1.toString() + '1')
+    }
+    if (e.keyCode == 50 || e.keyCode == 98) {
+      setValue1(value1.toString() + '2')
+    }
+    if (e.keyCode == 51 || e.keyCode == 99) {
+      setValue1(value1.toString() + '3')
+    }
+    if (e.keyCode == 52 || e.keyCode == 100) {
+      setValue1(value1.toString() + '4')
+    }
+    if (e.keyCode == 53 || e.keyCode == 101) {
+      setValue1(value1.toString() + '5')
+    }
+    if (e.keyCode == 54 || e.keyCode == 102) {
+      setValue1(value1.toString() + '6')
+    }
+    if (e.keyCode == 55 || e.keyCode == 103) {
+      setValue1(value1.toString() + '7')
+    }
+    if (e.keyCode == 56 || e.keyCode == 104) {
+      setValue1(value1.toString() + '8')
+    }
+    if (e.keyCode == 57 || e.keyCode == 105) {
+      setValue1(value1.toString() + '9')
+    }
+    if (e.keyCode == 8) {
+      if (value1 != '') {
+        setValue1(value1.slice(0, -1));
+      }
+    }
   }
 
   return (
@@ -84,11 +165,11 @@ const PointCharge = () => {
                     <div className="time-input-container">
                         <div className="time-input-box">
                             <label >ポイント</label>
-                            <input type="number" value={point} onChange={handlChangePoint} />
+                            <input type="text" value={point == 'NaN'? '': point} onChange={handlChangePoint} onKeyDown={handlePointKeyPress} />
                         </div>
                         <div className="time-input-box">
                             <label >JPY</label>
-                            <input type="number" value={amount} onChange={handleChangeAmount} />
+                            <input type="text" value={amount == 'NaN'? '': amount} onChange={handleChangeAmount} onKeyDown={handleAmountKeyPress} />
                         </div>
                     </div>
                 <div className="card-element-container">

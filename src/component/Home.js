@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { QRCode } from 'react-qrcode-logo';
 import Footer from './Layout/footer';
 import Header from './Layout/header';
 import axios from 'axios';
@@ -53,7 +54,8 @@ class Home extends Component{
            userPoint:0,
            avartar:"",
            newEventNum:0,
-           language:JSON.parse(localStorage.language).language
+           language:JSON.parse(localStorage.language).language,
+           email: JSON.parse(localStorage.getItem('userData')).email
         }
     }
 
@@ -114,7 +116,7 @@ class Home extends Component{
     }
 
     render(){  
-        const {loading, language, userName, userPoint, userType, avartar, newEventNum} = this.state     
+        const {loading, language, userName, userPoint, userType, avartar, newEventNum, email} = this.state     
         return(
         <>
             <div className="container">
@@ -208,7 +210,9 @@ class Home extends Component{
                         </div>
                         <div className="top-foot-top">
                             <div><img src="./assets/image/logo1.png" alt="" /></div>
-                            <div><img src="./assets/image/qr-code1.png" alt="" /></div>
+                            <div className='scan-qrcode-container'>
+                                <QRCode size={500} value={email} />
+                            </div>
                         </div>
                     </div>
                 </div>

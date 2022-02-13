@@ -13,8 +13,10 @@ class SendPoint extends Component{
         super(props)
         this.state={
             email:"",
-            sendpoint:0,
-            receivepoint:0,
+            sendpoint:'',
+            receivepoint:'',
+            value: '',
+            value1: '',
             error_receptance:"",
             error_point:"",
             loading:false
@@ -23,17 +25,93 @@ class SendPoint extends Component{
 
     handlChangeSendPoint =  e =>{
         this.setState({
-            sendpoint: e.target.value,
-            receivepoint:e.target.value * 0.973
+            sendpoint: this.state.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+            receivepoint: parseFloat(parseFloat(this.state.value) * 0.973).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
     }
 
     handleChangeReceive =  e =>{
         this.setState({
-           sendpoint: e.target.value / 0.973,
-           receivepoint:e.target.value
+           sendpoint: parseFloat(parseFloat(this.state.value1) / 0.973).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+           receivepoint: this.state.value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             
         });
+    }
+
+    handleSendKeyPress = e => {
+        if (e.keyCode == 48 || e.keyCode == 96) {
+          this.setState({value: this.state.value.toString() + '0'})
+        }
+        if (e.keyCode == 49 || e.keyCode == 97) {
+          this.setState({value: this.state.value.toString() + '1'})
+        }
+        if (e.keyCode == 50 || e.keyCode == 98) {
+          this.setState({value: this.state.value.toString() + '2'})
+        }
+        if (e.keyCode == 51 || e.keyCode == 99) {
+          this.setState({value: this.state.value.toString() + '3'})
+        }
+        if (e.keyCode == 52 || e.keyCode == 100) {
+          this.setState({value: this.state.value.toString() + '4'})
+        }
+        if (e.keyCode == 53 || e.keyCode == 101) {
+          this.setState({value: this.state.value.toString() + '5'})
+        }
+        if (e.keyCode == 54 || e.keyCode == 102) {
+          this.setState({value: this.state.value.toString() + '6'})
+        }
+        if (e.keyCode == 55 || e.keyCode == 103) {
+          this.setState({value: this.state.value.toString() + '7'})
+        }
+        if (e.keyCode == 56 || e.keyCode == 104) {
+          this.setState({value: this.state.value.toString() + '8'})
+        }
+        if (e.keyCode == 57 || e.keyCode == 105) {
+          this.setState({value: this.state.value.toString() + '9'})
+        }
+        if (e.keyCode == 8) {
+            if (this.state.value != '') {
+                this.setState({value: this.state.value.slice(0, -1)});
+            }
+        }
+    }
+    
+    handleReceiveKeyPress = e => {
+        if (e.keyCode == 48 || e.keyCode == 96) {
+          this.setState({value1: this.state.value1.toString() + '0'})
+        }
+        if (e.keyCode == 49 || e.keyCode == 97) {
+          this.setState({value1: this.state.value1.toString() + '1'})
+        }
+        if (e.keyCode == 50 || e.keyCode == 98) {
+          this.setState({value1: this.state.value1.toString() + '2'})
+        }
+        if (e.keyCode == 51 || e.keyCode == 99) {
+          this.setState({value1: this.state.value1.toString() + '3'})
+        }
+        if (e.keyCode == 52 || e.keyCode == 100) {
+          this.setState({value1: this.state.value1.toString() + '4'})
+        }
+        if (e.keyCode == 53 || e.keyCode == 101) {
+          this.setState({value1: this.state.value1.toString() + '5'})
+        }
+        if (e.keyCode == 54 || e.keyCode == 102) {
+          this.setState({value1: this.state.value1.toString() + '6'})
+        }
+        if (e.keyCode == 55 || e.keyCode == 103) {
+          this.setState({value1: this.state.value1.toString() + '7'})
+        }
+        if (e.keyCode == 56 || e.keyCode == 104) {
+          this.setState({value1: this.state.value1.toString() + '8'})
+        }
+        if (e.keyCode == 57 || e.keyCode == 105) {
+          this.setState({value1: this.state.value1.toString() + '9'})
+        }
+        if (e.keyCode == 8) {
+            if (this.state.value1 != '') {
+                this.setState({value1: this.state.value1.slice(0, -1)});
+            }
+        }
     }
 
     handleChange = filedName => e=>{
@@ -48,13 +126,14 @@ class SendPoint extends Component{
         
         event.preventDefault();
         const {email, sendpoint} = this.state
+        var sendpoint1 = parseFloat(sendpoint.replace(/,/g, ''))
         var validate = true;
         if(email==="")
         {
             this.setState({error_receptance:"受信者のメールアドレスを入力してください。"})
             validate = false;
         }
-        if(sendpoint<1)
+        if(sendpoint1<1)
         {
             this.setState({error_point:"送信するポイントの量を入力してください。"})
             validate = false;
@@ -66,7 +145,7 @@ class SendPoint extends Component{
         this.setState({loading:true});
         var userData = JSON.parse(localStorage.userData);
         var token = userData.token;
-        var data = JSON.stringify({email:email, point:sendpoint});
+        var data = JSON.stringify({email:email, point:sendpoint1});
         var config = {
             method: 'POST',
             url: `${baseurl}/api/point/send`,
@@ -132,11 +211,11 @@ class SendPoint extends Component{
                                 <div className="time-input-container">
                                     <div className="time-input-box">
                                         <label >送信ポイント</label>
-                                        <input type="number" value={sendpoint} onChange={this.handlChangeSendPoint} />
+                                        <input type="text" value={sendpoint == 'NaN'? '': sendpoint} onChange={this.handlChangeSendPoint} onKeyDown={this.handleSendKeyPress} />
                                     </div>
                                     <div className="time-input-box">
                                         <label >受け取りポイント</label>
-                                        <input type="number" value={receivepoint} onChange={this.handleChangeReceive} />
+                                        <input type="text" value={receivepoint == 'NaN'? '': receivepoint} onChange={this.handleChangeReceive} onKeyDown={this.handleReceiveKeyPress} />
                                     </div>
                                 </div>
                                 <span className="error">{error_point}</span>

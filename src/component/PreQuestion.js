@@ -32,6 +32,11 @@ class PreQuestion extends Component{
             loading:false,
             language:JSON.parse(localStorage.language).language,
             userPoint:"",
+            business: true,
+            realEstate: true,
+            unoccupied: true,
+            financial: true,
+            content: '',
         }
     }
 
@@ -49,33 +54,67 @@ class PreQuestion extends Component{
         }
         if(userData.userstatus===2)
         {
-            this.getUserdata()
+            this.getPreQuestion()
         }
     }
 
-    getUserdata()
+    getPreQuestion()
     {
         var userData = JSON.parse(localStorage.userData);
         var token = userData.token
         var config = {
             method: 'get',
-            url: `${baseurl}/api/account/getProfile`,
-            headers: { 
+            url: `${baseurl}/api/getprequestion`,
+            headers: {
             'Authorization': 'Bearer ' + token,
             },
                 data : {},
         };
         axios(config)
         .then((response) => {
-            var userData = response.data.user;
-            var srcBase64 = userData.userAvatar;
+            if (response.data.prequestion) {
+                var prequestion = JSON.parse(response.data.prequestion)[0]
+                console.log(prequestion)
+                this.setState({
+                    business: prequestion.fields.business,
+                    realEstate: prequestion.fields.realEstate,
+                    unoccupied: prequestion.fields.unoccupied,
+                    financial: prequestion.fields.financial,
+                    content: prequestion.fields.content
+                })
+            }
+        })
+        .catch((error)=>{
             this.setState({
-                loading:false,
-                userName: userData.userName,
-                userType:userData.userType,
-                userPoint: userData.userPoint,
-                avartar: srcBase64
+                loading:false
             })
+            if (error.response) {
+                if(error.response.status===401){
+                    localStorage.removeItem("userData");
+                    window.location.assign('/');
+                }
+            }
+        })
+    }
+
+    sendPreQuestion = (e) => {
+        this.setState({loading: true})
+        const {business, realEstate, unoccupied, financial, content} = this.state;
+        var userData = JSON.parse(localStorage.userData);
+        var token = userData.token
+        var data = JSON.stringify({'business': business, 'realEstate': realEstate, 'unoccupied': unoccupied, 'financial': financial, 'content': content})
+        var config = {
+            method: 'post',
+            url: `${baseurl}/api/sendprequestion`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            data : data,
+        };
+        axios(config)
+        .then((response) => {
+            window.location.assign('/home')
         })
         .catch((error)=>{
             this.setState({
@@ -91,7 +130,7 @@ class PreQuestion extends Component{
     }
 
     render(){
-        const{language,userPoint,loading} = this.state
+        const{language,userPoint,loading, business, realEstate, unoccupied, financial, content} = this.state
         return(
             <>
                 <div className="container">
@@ -99,30 +138,62 @@ class PreQuestion extends Component{
                     <div className="top-content-spec top-main-link prequestion-container">
                         <h3>まずは下記の簡単なアンケートにお答え下さい。</h3>
                         <div className="prequestion-input">
-                            <h4>項目１</h4>
-                            <input type="text" />
+                            <h4>ビジネスマッチングに興味はありますか？</h4>
+                            <div className="prequestion-input-main">
+                                <div>
+                                    <input type="radio" name="business" value="y" id="business_y" checked={business==true} onChange={()=>this.setState({business: true})} />
+                                    <label htmlFor="business_y">はい</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="business" value="n" id="business_n" checked={business==false} onChange={()=>this.setState({business: false})}  />
+                                    <label htmlFor="business_n">いいえ</label>
+                                </div>
+                            </div>
                         </div>
                         <div className="prequestion-input">
-                            <h4>項目２</h4>
-                            <input type="text" />
+                            <h4>不動産情報に興味はありますか？</h4>
+                            <div className="prequestion-input-main">
+                                <div>
+                                    <input type="radio" name="realEstate" value="y" id="realEstate_y" checked={realEstate==true} onChange={()=>this.setState({realEstate: true})} />
+                                    <label htmlFor="realEstate_y">はい</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="realEstate" value="n" id="realEstate_n" checked={realEstate==false} onChange={()=>this.setState({realEstate: false})} />
+                                    <label htmlFor="realEstate_n">いいえ</label>
+                                </div>
+                            </div>
                         </div>
                         <div className="prequestion-input">
-                            <h4>項目３</h4>
-                            <input type="text" />
+                            <h4>居抜き物件に興味はありますか？</h4>
+                            <div className="prequestion-input-main">
+                                <div>
+                                    <input type="radio" name="unoccupied" value="y" id="unoccupied_y" checked={unoccupied==true} onChange={()=>this.setState({unoccupied: true})} />
+                                    <label htmlFor="unoccupied_y">はい</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="unoccupied" value="n" id="unoccupied_n" checked={unoccupied==false} onChange={()=>this.setState({unoccupied: false})} />
+                                    <label htmlFor="unoccupied_n">いいえ</label>
+                                </div>
+                            </div>
                         </div>
                         <div className="prequestion-input">
-                            <h4>項目４</h4>
-                            <input type="text" />
+                            <h4>金融情報（投資案件）に興味はありますか？</h4>
+                            <div className="prequestion-input-main">
+                                <div>
+                                    <input type="radio" name="financial" value="y" id="financial_y" checked={financial==true} onChange={()=>this.setState({financial: true})} />
+                                    <label htmlFor="financial_y">はい</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="financial" value="n" id="financial_n" checked={financial==false} onChange={()=>this.setState({financial: false})} />
+                                    <label htmlFor="financial_n">いいえ</label>
+                                </div>
+                            </div>
                         </div>
                         <div className="prequestion-input">
-                            <h4>項目５</h4>
-                            <input type="text" />
+                            <h4>その他興味のあることを自由にご記入ください。</h4>
+                            <textarea rows={5} value={content} onChange={(e)=>this.setState({content: e.target.value})}></textarea>
                         </div>
-                        <div className="prequestion-input">
-                            <h4>項目６</h4>
-                            <input type="text" />
-                        </div>
-                        <button className="prequestion-btn">送信</button>
+                        <button className="prequestion-btn" onClick={this.sendPreQuestion}>送信</button>
                     </div>
                     <Footer/>
                 </div>

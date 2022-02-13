@@ -463,7 +463,7 @@ input, select {
     background-color: #48C855;
     border-radius: 15px;
     padding-top: 18px;
-    margin: 150px 0 20px;
+    margin: 250px 0 30px;
     color: #0B963A;
     position: relative;
 }
@@ -558,7 +558,7 @@ input, select {
 .login-input-box input {
     width: 100%;
     font-size: 15px;
-    padding: 20px 0;
+    padding: 20px 10px;
     border: none;
     outline: none;
     background-color: transparent;
@@ -570,7 +570,7 @@ input, select {
     position: absolute;
     font-weight: bold;
     top: 18px;
-    left: 0;
+    left: 10px;
     transform-origin: 0%;
     z-index: 1;
     transition: all .3s ease;
@@ -578,7 +578,7 @@ input, select {
 }
 .login-input-box i {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 50%;
     transform: translateY(-55%);
     color: #CAA846;
@@ -1846,7 +1846,7 @@ input.real-estate-input-input {
     text-align: center;
 }
 input:-internal-autofill-selected {
-    background-color: white !important;
+    background-color: transparent !important;
 }
 .coming {
     display: flex;
@@ -2535,25 +2535,36 @@ iframe {
 }
 .prequestion-container {
     color: white;
-    text-align: center;
-}
-.prequestion-container input {
-    color: black;
-    text-align: left;
-    width: 100%;
-    font-size: 13px;
-    padding: 5px;
+    font-size: 14px;
 }
 .prequestion-container h3 {
-    font-size: 14px;
+    font-size: 1em;
     margin-bottom: 20px;
+    text-align: center;
 }
 .prequestion-container h4 {
-    font-size: 15px;
-    margin-bottom: 7px;
+    font-size: 1em;
+    margin-bottom: .5em;
 }
 .prequestion-input {
-    margin-bottom: 10px;
+    margin-bottom: 1em;
+}
+.prequestion-input-main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.prequestion-input-main div {
+    margin-right: 2em;
+}
+.prequestion-input-main input {
+    margin-right: .5em;
+}
+.prequestion-input textarea {
+    width: 100%;
+    resize: vertical;
+    outline: none;
+    padding: .3em;
 }
 .prequestion-btn {
     display: flex;
@@ -2568,8 +2579,20 @@ iframe {
     margin: 40px auto 20px;
     border-radius: 10px;
 }
+.notification-container-main {
+    height: calc(100% - 80px);
+    position: relative;
+    padding-top: 164px;
+}
+.notification-container-spec {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 164px !important;
+}
 .notification-container {
     padding: 30px 30px 0;
+    height: 100%;
 }
 .notification-card {
     background-color: white;
@@ -2611,14 +2634,13 @@ iframe {
     background-color: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, .5);
     padding: 10px;
-    height: 300px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 .chat-card-content {
     overflow-y: scroll;
-    padding-bottom: 10px;
     display: flex;
     flex-direction: column-reverse;
 }
@@ -2633,9 +2655,16 @@ iframe {
     justify-content: flex-start;
     align-items: flex-start;
     margin-top: 10px;
+    padding-left: 40px;
 }
-.chat-inbox img {
+.chat-inbox > img {
     width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.chat-inbox div {
+    max-width: 180px;
 }
 .chat-inbox p {
     padding: 10px 15px;
@@ -2643,8 +2672,14 @@ iframe {
     font-size: 14px;
     border-radius: 0 15px 15px;
     margin-left: 10px;
-    max-width: 180px;
     overflow: hidden;
+}
+.chat-inbox div img {
+    width: 100%;
+    margin-left: 10px;
+}
+.chat-inbox.first {
+    padding-left: 0;
 }
 .chat-outbox {
     display: flex;
@@ -2652,14 +2687,19 @@ iframe {
     align-items: flex-end;
     margin-top: 10px;
 }
+.chat-outbox div {
+    max-width: 180px;
+}
 .chat-outbox p {
     padding: 10px 15px;
     background-color: #007AFF;
     color: white;
     font-size: 14px;
     border-radius: 15px 15px 0 15px;
-    max-width: 180px;
     overflow: hidden;
+}
+.chat-outbox div img {
+    width: 100%;
 }
 .chat-unread {
     display: flex;
@@ -2696,6 +2736,19 @@ iframe {
 }
 .chat-input button img {
     width: 20px;
+    filter: hue-rotate(.25turn);
+}
+.chat-photo {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+.chat-photo button {
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.chat-photo button img {
     filter: hue-rotate(.25turn);
 }
 
@@ -2745,4 +2798,14 @@ iframe {
 .scan .error {
     display: block;
     margin-bottom: 1.5em;
+}
+
+.scan-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: left;
 }

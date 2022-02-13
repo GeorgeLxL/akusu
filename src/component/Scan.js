@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { QRCode } from 'react-qrcode-logo';
 
 import Preloader from './Layout/preloader';
@@ -11,26 +11,27 @@ const baseurl = process.env.REACT_APP_API_BASE_URL;
 
 function Scan() {
 
+    const history = useHistory();
+
     const [loading, setLoading] = useState(false);
     const [totalPoint, settotalPoint] = useState(0);
-    const [sendPoint, setSendPoint] = useState(0);
-    const [receivePoint, setReceivePoint] = useState(0);
     const [value, setValue] = useState('');
-    const [errorPoint, setErrorPoint] = useState('')
 
     useEffect(()=>{
         var userData = JSON.parse(localStorage.userData);
         var email = userData.email
+        setValue(email.toString())
         getUserdata()
-        setValue(email.toString() + ' ' + sendPoint.toString())
-    },[sendPoint])
+        const interval = setInterval(() => getScanStatus(), 2000);
+        return () => clearInterval(interval)
+    },[])
 
     const getUserdata = () => {
         var userData = JSON.parse(localStorage.userData);
         var token = userData.token
         var config = {
-            method: 'get',
-            url: `${baseurl}/api/account/getProfile`,
+            method: 'post',
+            url: `${baseurl}/api/account/getScanProfile`,
             headers: { 
             'Authorization': 'Bearer ' + token,
             },
@@ -53,30 +54,39 @@ function Scan() {
         })
     }
 
-    const handlChangeSendPoint = e =>{
-        if (e.target.value < parseFloat(totalPoint)) {
-            setSendPoint(e.target.value)
-            setReceivePoint(e.target.value * 0.973)
-        }
-        else {
-            setSendPoint(totalPoint)
-            setReceivePoint(totalPoint * 0.973)
-        }
-        if (e.target.value < 1) setErrorPoint('送信するポイントの量を入力してください。')
-        else setErrorPoint('')
-    }
-
-    const handleChangeReceive =  e =>{
-        if (e.target.value < (parseFloat(totalPoint) * 0.973)) {
-            setSendPoint(e.target.value / 0.973)
-            setReceivePoint(e.target.value)
-        }
-        else {
-            setSendPoint(totalPoint)
-            setReceivePoint(totalPoint * 0.973)
-        }
-        if (e.target.value < 0.973) setErrorPoint('送信するポイントの量を入力してください。')
-        else setErrorPoint('')
+    const getScanStatus = () => {
+        var userData = JSON.parse(localStorage.userData);
+        var token = userData.token
+        var config = {
+            method: 'post',
+            url: `${baseurl}/api/point/getScanStatus`,
+            headers: { 
+            'Authorization': 'Bearer ' + token,
+            },
+                data : {},
+        };
+        axios(config)
+        .then((response) => {
+            if (response.data.scanStatus==1) {
+                history.push({
+                    pathname: '/scan/receive_success',
+                    status: {
+                        sender: response.data.sender,
+                        senderID: response.data.senderID,
+                        point: response.data.point
+                    }
+                })
+            }
+        })
+        .catch((error)=>{
+            setLoading(false)
+            if (error.response) {
+                if(error.response.status===401){
+                    localStorage.removeItem("userData");
+                    window.location.assign('/');
+                }
+            }
+        })
     }
 
     return(
@@ -85,23 +95,12 @@ function Scan() {
                 <Header pageName="バーコードで送受信"/>
                     <div className="seminar-detail-card">
                         <div className='scan'>
-                            <h2>バーコードで支払う</h2>
+                            <h2>バーコードで送受信</h2>
                             <h4>現在の保有ポイント : {totalPoint}</h4>
-                            <div className="time-input-container">
-                                <div className="time-input-box">
-                                    <label >送信ポイント</label>
-                                    <input type="number" value={sendPoint} onChange={(e)=>handlChangeSendPoint(e)} />
-                                </div>
-                                <div className="time-input-box">
-                                    <label >受け取りポイント</label>
-                                    <input type="number" value={receivePoint} onChange={(e)=>handleChangeReceive(e)} />
-                                </div>
-                            </div>
-                            <span className="error">{errorPoint}</span>
                             <div className='scan-qrcode-container'>
                                 <QRCode size={500} value={value} />
                             </div>
-                            <Link to="/scan/receive">スキャンしで受け取る</Link>
+                            <Link to="/scan/send">スキャンして送る</Link>
                         </div>
                     </div>
                 <Footer/>

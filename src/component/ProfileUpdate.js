@@ -84,7 +84,7 @@ const jp ={
     phone_valid_error:"有効な電話番号を入力してください。",
     user_type:"会員種類",
     individual_member:"個人会員",
-    company_member:"企業",
+    company_member:"ビジネス利用",
     operator:"運営者",
     introducer1:"紹介者A",
     introducer2:"紹介者B",
@@ -401,10 +401,10 @@ class ProfileUpdate extends Component{
                             <select value={userType} onChange={this.handleChangeField("userType")}>
                                 <option value="0">{eval(language).individual_member}</option>
                                 <option value="1">{eval(language).company_member}</option>
-                                <option value="2">{eval(language).operator}</option>
+                                {/* <option value="2">{eval(language).operator}</option>
                                 <option value="3">{eval(language).introducer1}</option>
                                 <option value="4">{eval(language).introducer2}</option>
-                                <option value="5">{eval(language).introducer3}</option>
+                                <option value="5">{eval(language).introducer3}</option> */}
                             </select>
                         </div>
                     </div>
@@ -447,7 +447,7 @@ class ProfileUpdate extends Component{
                         </div>
                         
                     </div>
-                    <div className="seminar-card">
+                    {/* <div className="seminar-card">
                         <h3 className="profile-input-main-title">{eval(language).course}</h3>
                         <div className="profile-input-box">
                             <div className="profile-title">
@@ -503,7 +503,7 @@ class ProfileUpdate extends Component{
                                 <input type="text" className="profile-input-input profile-input-input2" name="fin-name" value={accountName} onChange={this.handleChangeField("accountName")} />
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="seminar-card">
                         <div className="profile-input-box">
                             <div className="profile-title">

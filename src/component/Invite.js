@@ -186,7 +186,7 @@ class Invite extends Component{
                                 </div>
                             </div>
                             <div>
-                                <div>
+                                <div onClick={(e)=>window.location.reload()}>
                                     <img src="/assets/image/invite-icon-refresh.png" alt="Refresh" />
                                     <p>更新</p>
                                 </div>
@@ -199,6 +199,15 @@ class Invite extends Component{
                         <h3>獲得ポイント：0 &#62;</h3>
                     </div>
                     <Footer/>
+                </div>
+                <div id="intro-modal" onClick={this.modalClose}>
+                    <div className="container">
+                        <div className="intro-modal-body" onClick={this.modalMain}>
+                            <h3>{eval(language).intro}</h3>
+                            <input type="email" required />
+                            <button>{eval(language).send}</button>
+                        </div>
+                    </div>
                 </div>
                 <div id="intro-modal" onClick={this.modalClose}>
                     <div className="container">
