@@ -59,7 +59,7 @@ class Header extends Component{
                         this.props.Intro==false?
                         <a className="introduce" href="/invite">{eval(language).intro}</a>
                         :
-                        <p className="introduce-text">達成しました</p>
+                        ""
                     }
                     <h3>{this.props.pageName}</h3>
                     <div className={this.state.toggle ? "menu_icon change" : "menu_icon"} onClick={this.menu_click}>
