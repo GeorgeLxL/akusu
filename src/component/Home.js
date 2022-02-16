@@ -54,6 +54,7 @@ class Home extends Component{
            userPoint:0,
            avartar:"",
            newEventNum:0,
+           invite: false,
            language:JSON.parse(localStorage.language).language,
            email: JSON.parse(localStorage.getItem('userData')).email
         }
@@ -62,7 +63,6 @@ class Home extends Component{
     componentDidMount()
     {
         var userData = JSON.parse(localStorage.userData);
-        console.log(userData)
         if(userData.userstatus===0)
         {
             this.props.history.push("/emailverify");
@@ -99,7 +99,8 @@ class Home extends Component{
                 userName: userData.userName,
                 userType:userData.userType,
                 userPoint: userData.userPoint,
-                avartar: srcBase64
+                avartar: srcBase64,
+                invite: userData.invite,
             })
         })
         .catch((error)=>{
@@ -116,11 +117,11 @@ class Home extends Component{
     }
 
     render(){  
-        const {loading, language, userName, userPoint, userType, avartar, newEventNum, email} = this.state     
+        const {loading, language, userName, userPoint, userType, avartar, newEventNum, email, invite} = this.state
         return(
         <>
             <div className="container">
-                <Header notback={true} Intro={true} pageName={eval(language).home}/>
+                <Header notback={true} Intro={invite} pageName={eval(language).home}/>
                 <div className="top-profile">
                     <div className="top-profile-img">
                         <img src={avartar ? `${baseurl}/media/${avartar}`: './assets/image/avatar.svg'} alt="" />

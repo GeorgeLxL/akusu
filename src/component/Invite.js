@@ -50,6 +50,9 @@ class Invite extends Component{
             avartar:"",
             language:JSON.parse(localStorage.language).language,
             userPoint:"",
+            invite: false,
+            referalcode: '',
+            emailModal: false,
         }
     }
 
@@ -87,12 +90,15 @@ class Invite extends Component{
         .then((response) => {
             var userData = response.data.user;
             var srcBase64 = userData.userAvatar;
+            if (userData.invite) window.location.assign('/home')
             this.setState({
                 loading:false,
                 userName: userData.userName,
                 userType:userData.userType,
                 userPoint: userData.userPoint,
-                avartar: srcBase64
+                avartar: srcBase64,
+                invite: userData.invite,
+                referalcode:(userData.referalcode=='null' || userData.referalcode==null)?'':userData.referalcode,
             })
         })
         .catch((error)=>{
@@ -108,24 +114,8 @@ class Invite extends Component{
         })
     }
 
-    inviteClick = e => {
-        var modal = document.getElementById('intro-modal');
-        if (!modal.classList.contains('intro-modal-show'))
-            modal.classList.add('intro-modal-show')
-    }
-
-    modalClose = e => {
-        var modal = document.getElementById('intro-modal');
-        if (modal.classList.contains('intro-modal-show'))
-            modal.classList.remove('intro-modal-show')
-    }
-
-    modalMain = e=> {
-        e.stopPropagation()
-    }
-
     render(){
-        const{language,userPoint,loading, avartar, userName, userType, } = this.state
+        const{language,userPoint,loading, avartar, userName, userType, referalcode, emailModal} = this.state
         return(
             <>
                 <div className="container">
@@ -152,69 +142,60 @@ class Invite extends Component{
                         </table>
                     </div>
                     <div className="invite-container">
-                        <h3>友達を招待して、<br />¥100を確実にゲットしよう！</h3>
-                        <p>招待コード：xxxxxxx</p>
+                        <h3>友達を招待して、<br />10ポイントを確実にゲットしよう！</h3>
+                        <p>招待コード：<span>{referalcode}</span></p>
                         <h3>友達を招待する方法</h3>
                         <p>1.あなたの招待リンクからAKUSHUをダウンロード<br />するように友達に頼む</p>
-                        <p>2.友達があなたの招待コード xxxxxxxxを入力</p>
+                        <p>2.友達があなたの招待コード <span>{referalcode}</span>を入力</p>
                         <div className="invite-main">
                             <h4>シェア</h4>
                             <div>
-                                <div>
+                                <a>
                                     <img src="/assets/image/invite-icon-line.png" alt="Line Icon" />
                                     <p>Line</p>
-                                </div>
-                                <div>
+                                </a>
+                                <a>
                                     <img src="/assets/image/invite-icon-link.png" alt="Link Icon" />
                                     <p>リンクを<br />コピー</p>
-                                </div>
-                                <div>
+                                </a>
+                                <a>
                                     <img src="/assets/image/invite-icon-twitter.png" alt="Twitter Icon" />
                                     <p>Twitter</p>
-                                </div>
-                                <div onClick={this.inviteClick}>
+                                </a>
+                                <a onClick={()=>this.setState({emailModal: true})}>
                                     <img src="/assets/image/invite-icon-mail.png" alt="mail Icon" />
                                     <p>メール</p>
-                                </div>
-                                <div>
+                                </a>
+                                <a>
                                     <img src="/assets/image/invite-icon-facebook.png" alt="Facebook Icon" />
                                     <p>Facebook</p>
-                                </div>
-                                <div>
+                                </a>
+                                <a>
                                     <img src="/assets/image/invite-icon-sms.png" alt="SMS Icon" />
                                     <p>SMS</p>
-                                </div>
+                                </a>
                             </div>
                             <div>
-                                <div onClick={(e)=>window.location.reload()}>
+                                <a onClick={(e)=>window.location.reload()}>
                                     <img src="/assets/image/invite-icon-refresh.png" alt="Refresh" />
                                     <p>更新</p>
-                                </div>
-                                <div>
+                                </a>
+                                <a>
                                     <img src="/assets/image/invite-icon-safari.png" alt="Safari Icon" />
                                     <p>Safari で<br />開く</p>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <h3>獲得ポイント：0 &#62;</h3>
                     </div>
                     <Footer/>
                 </div>
-                <div id="intro-modal" onClick={this.modalClose}>
+                <div className={`intro-modal ${emailModal?'intro-modal-show':''}`} onClick={()=>this.setState({emailModal: false})}>
                     <div className="container">
-                        <div className="intro-modal-body" onClick={this.modalMain}>
+                        <div className="intro-modal-body" onClick={(e)=>e.stopPropagation()}>
                             <h3>{eval(language).intro}</h3>
                             <input type="email" required />
-                            <button>{eval(language).send}</button>
-                        </div>
-                    </div>
-                </div>
-                <div id="intro-modal" onClick={this.modalClose}>
-                    <div className="container">
-                        <div className="intro-modal-body" onClick={this.modalMain}>
-                            <h3>{eval(language).intro}</h3>
-                            <input type="email" required />
-                            <button>{eval(language).send}</button>
+                            <button onClick={()=>this.setState({emailModal: false})} >{eval(language).send}</button>
                         </div>
                     </div>
                 </div>

@@ -37,6 +37,7 @@ class PreQuestion extends Component{
             unoccupied: true,
             financial: true,
             content: '',
+            error: '',
         }
     }
 
@@ -100,6 +101,7 @@ class PreQuestion extends Component{
     sendPreQuestion = (e) => {
         this.setState({loading: true})
         const {business, realEstate, unoccupied, financial, content} = this.state;
+        if (content=="") {this.setState({error: '※必須項目が未入力です。', loading: false}); return }
         var userData = JSON.parse(localStorage.userData);
         var token = userData.token
         var data = JSON.stringify({'business': business, 'realEstate': realEstate, 'unoccupied': unoccupied, 'financial': financial, 'content': content})
@@ -130,7 +132,7 @@ class PreQuestion extends Component{
     }
 
     render(){
-        const{language,userPoint,loading, business, realEstate, unoccupied, financial, content} = this.state
+        const{language,userPoint,loading, business, realEstate, unoccupied, financial, content, error} = this.state
         return(
             <>
                 <div className="container">
@@ -194,6 +196,7 @@ class PreQuestion extends Component{
                             <textarea rows={5} value={content} onChange={(e)=>this.setState({content: e.target.value})}></textarea>
                         </div>
                         <button className="prequestion-btn" onClick={this.sendPreQuestion}>送信</button>
+                        <p className="error-hissu">{error}</p>
                     </div>
                     <Footer/>
                 </div>

@@ -96,6 +96,7 @@ class ProfileUpdate extends Component{
         super(props);
         this.state={
             language:JSON.parse(localStorage.language).language,
+            userStatus: JSON.parse(localStorage.getItem('userData')).userstatus,
             loading:false,
             surname:"",
             lastname:"",
@@ -126,12 +127,13 @@ class ProfileUpdate extends Component{
             erroraddress1:"",
             erroraddress2:"",
             errorstreetName:"",
+            error: '',
+            referalCodeModal: false,
         }
     }
 
-    handleChangeField = filedName => e=>{
+    handleChangeField = fieldName => e=>{
         this.setState({
-            [filedName]:e.target.value,
             errorName:"",
             errorFuriganaName:"",
             errorPhonNumber:"",
@@ -139,7 +141,19 @@ class ProfileUpdate extends Component{
             erroraddress1:"",
             erroraddress2:"",
             errorstreetName:"",
+            error: "",
         })
+        if (fieldName=='referalcode' || fieldName =='phone') {
+            this.setState({
+                [fieldName]: (e.target.value).replace(/[^0-9]/ig, '')
+            })
+            return;
+        }
+        else {
+            this.setState({
+                [fieldName]:e.target.value,
+            })
+        }
     }
 
 
@@ -172,33 +186,32 @@ class ProfileUpdate extends Component{
         axios(config)
         .then((response) => {
             var userData = response.data.user;
-            const {name1, name2, kana1, kana2, maidenname, gender, phone, birthday, address1, address2, street, buildingName, bankName, branchName, depositType, accountNumber, accountName, referalcode, userType} = userData
+            const {name1,name2, kana1, kana2, maidenname, gender, phone, birthday, address1, address2, street, buildingName, bankName, branchName, depositType, accountNumber, accountName, referalcode, userType} = userData
             var srcBase64 = "";
             if(userData.userAvatar)
             {
                 srcBase64 = `${baseurl}/media/${userData.userAvatar}`
             }
             this.setState({
-                surname:name1,
-                lastname:name2,
-                surnameFurigana:kana1,
-                lastnameFurigana:kana2,
-                maidenname:maidenname,
+                surname:name1==null?'':name1,
+                lastname:name2==null?"":name2,
+                surnameFurigana:kana1==null?"":kana1,
+                lastnameFurigana:kana2==null?"":kana2,
+                maidenname:maidenname==null?"":maidenname,
                 gender:gender? `${gender}` : "1",
-                phone:phone,
-                birthday:birthday,
-                address1:address1,
-                address2:address2,
-                street:street,
-                buildingName:buildingName,
-                bankName:bankName,
-                branchName:branchName,
-                depositType:depositType,
-                accountNumber:accountNumber,
-                accountName:accountName,
-                referalcode:referalcode,
+                phone:phone==null?"":phone,
+                birthday:birthday==null?"":birthday,
+                address1:address1==null?"":address1,
+                address2:address2==null?"":address2,
+                street:street==null?"":street,
+                buildingName:buildingName==null?"":buildingName,
+                bankName:bankName==null?"":bankName,
+                branchName:branchName==null?"":branchName,
+                depositType:depositType==null?"":depositType,
+                accountNumber:accountNumber==null?"":accountNumber,
+                accountName:accountName==null?"":accountName,
                 avatarimg:srcBase64,
-                userType:userType
+                userType:userType==null?"":userType,
             })
         })
         .catch((error)=>{
@@ -219,38 +232,36 @@ class ProfileUpdate extends Component{
         const{language,surname,lastname,surnameFurigana,lastnameFurigana,maidenname,gender,phone,birthday, userType, address1, address2, street, buildingName,bankName, branchName, depositType,accountNumber, accountName, referalcode, avatarimgFile,changeAvatar}=this.state
         
         var validate = true;
-        if(surname==="" || lastname===""){
-            this.setState({errorName:eval(language).require_error})
+        if(surname==="" || surname==null || lastname==="" || surname==null){
+            this.setState({errorName:eval(language).require_error, error: '※必須項目が未入力です。'})
             validate = false;
         }
-        if(surnameFurigana==="" || lastnameFurigana===""){
-            this.setState({errorFuriganaName:eval(language).require_error})
+        if(surnameFurigana==="" || surnameFurigana===null || lastnameFurigana==="" || lastnameFurigana===null){
+            this.setState({errorFuriganaName:eval(language).require_error, error: '※必須項目が未入力です。'})
             validate = false;
         }
-        if(phone===""){
-            this.setState({errorPhonNumber:eval(language).require_error})
+        if(phone==="" || phone===null){
+            this.setState({errorPhonNumber:eval(language).require_error, error: '※必須項目が未入力です。'})
             validate = false;
         }
-        if(birthday===""){
-            this.setState({errorbirthday:eval(language).require_error})
+        if(birthday==="" || birthday===null){
+            this.setState({errorbirthday:eval(language).require_error, error: '※必須項目が未入力です。'})
             validate = false;
         }
-        if(address1===""){
-            this.setState({erroraddress1:eval(language).require_error})
+        if(address1==="" || address1===null){
+            this.setState({erroraddress1:eval(language).require_error, error: '※必須項目が未入力です。'})
             validate = false;
         }
-        if(address2===""){
-            this.setState({erroraddress2:eval(language).require_error})
+        if(address2==="" || address2===null){
+            this.setState({erroraddress2:eval(language).require_error, error: '※必須項目が未入力です。'})
             validate = false;
         }
-        if(street===""){
-            this.setState({errorstreetName:eval(language).require_error})
+        if(street==="" || street===null){
+            this.setState({errorstreetName:eval(language).require_error, error: '※必須項目が未入力です。'})
             validate = false;
         }
-
-        var phoneno = /^\d([0-9]{0,10}\d)?$/;
-        if(phone!=="" && !phone.match(phoneno)) {
-            this.setState({errorPhonNumber:eval(language).phone_valid_error})
+        if(phone=="" || phone==null) {
+            this.setState({errorPhonNumber:eval(language).phone_valid_error, error: '※必須項目が未入力です。'})
             validate = false
         }
         if(!validate){
@@ -286,17 +297,56 @@ class ProfileUpdate extends Component{
                 'Authorization': 'Bearer ' + token,
             }
         }).then((response)=>{
-           this.setState({loading:false});
-           userData.userstatus = 2;
-           localStorage.setItem("userData", JSON.stringify(userData))
-           window.location.assign("/home");
+            this.setState({loading:false});
+            userData.userstatus = 2;
+            localStorage.setItem("userData", JSON.stringify(userData))
+            window.location.assign("/home");
         }).catch((error)=> {
-           this.setState({loading:false});
+            this.setState({loading:false});
+            if (error.response.data.error=="referalcode") {
+                this.setState({
+                    referalCodeModal: true
+                })
+                return;
+            }
         })       
     }
 
     render(){
-        const {language, loading,surname,lastname,surnameFurigana, lastnameFurigana, maidenname, gender, phone, birthday, userType, address1, address2, street, buildingName, bankName, branchName, depositType, accountNumber, accountName, avatarimg, referalcode, errorName, errorFuriganaName, errorPhonNumber, erroraddress1, erroraddress2, errorbirthday, errorstreetName} = this.state
+        const {
+            language,
+            loading,
+            surname,
+            lastname,
+            surnameFurigana,
+            lastnameFurigana,
+            maidenname,
+            gender,
+            phone,
+            birthday,
+            userType,
+            address1,
+            address2,
+            street,
+            buildingName,
+            bankName,
+            branchName,
+            depositType,
+            accountNumber,
+            accountName,
+            avatarimg,
+            referalcode,
+            errorName,
+            errorFuriganaName,
+            errorPhonNumber,
+            erroraddress1,
+            erroraddress2,
+            errorbirthday,
+            errorstreetName,
+            error,
+            userStatus,
+            referalCodeModal
+        } = this.state
         return(
             <>
             <div className="container">
@@ -504,23 +554,38 @@ class ProfileUpdate extends Component{
                             </div>
                         </div>
                     </div> */}
-                    <div className="seminar-card">
-                        <div className="profile-input-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).referral_code}<span className="nini">{eval(language).any}</span></h3>
-                            </div>
-                            <div className="profile-input-container">
-                                <div className="profile-input-dash"></div>
-                                <input type="text" className="profile-input-input profile-input-input2" name="referral-code" value={referalcode} onChange={this.handleChangeField("referalcode")} />
+                    {
+                        userStatus == 2?
+                        ""
+                        :
+                        <div className="seminar-card">
+                            <div className="profile-input-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).referral_code}<span className="nini">{eval(language).any}</span></h3>
+                                </div>
+                                <div className="profile-input-container">
+                                    <div className="profile-input-dash"></div>
+                                    <input type="text" className="profile-input-input profile-input-input2" name="referral-code" value={referalcode} onChange={this.handleChangeField("referalcode")} />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    
                     <div className="profile-input-submit">
                         <button onClick={this.handleSubmit} type="button">{eval(language).update}</button>
                     </div>
+                    <p className="error-hissu">{error}</p>
                 </form>
             </div>
             {this.props.footer && <Footer/>}
+        </div>
+        <div className={`intro-modal ${referalCodeModal?'intro-modal-show':''}`} onClick={()=>this.setState({referalCodeModal: false})}>
+            <div className="container">
+                <div className="intro-modal-body" onClick={(e)=>e.stopPropagation()}>
+                    <h3>招待コードが正しくありません。</h3>
+                    <button onClick={()=>this.setState({referalCodeModal: false})}>閉じる</button>
+                </div>
+            </div>
         </div>
          {loading &&
             <Preloader/>
