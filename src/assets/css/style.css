@@ -2849,3 +2849,8 @@ iframe {
     color: #ff2f14;
     font-weight: bold;
 }
+.forgot-text {
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}

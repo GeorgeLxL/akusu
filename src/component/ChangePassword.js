@@ -44,7 +44,8 @@ class ChangePassword extends Component{
             shownewPassword:false,
             showconfirmPassword:false,
             loading:false,
-            language:JSON.parse(localStorage.language).language
+            language:JSON.parse(localStorage.language).language,
+            error: ''
         }
     }
 
@@ -64,7 +65,8 @@ class ChangePassword extends Component{
 
     handleChange = filedName => e=>{
         this.setState({
-            [filedName]:e.target.value
+            [filedName]:e.target.value,
+            error: ''
         })
     }
 
@@ -77,8 +79,32 @@ class ChangePassword extends Component{
 
     handleSubmit = (e) =>{
         e.preventDefault();
+        const {email, password, newPassword, confirmPassword} = this.state
+        if (email=='') {
+            this.setState({
+                error: '※必須項目が未入力です。'
+            })
+            return
+        }
+        if (password=='') {
+            this.setState({
+                error: '※必須項目が未入力です。'
+            })
+            return
+        }
+        if (newPassword=='') {
+            this.setState({
+                error: '※必須項目が未入力です。'
+            })
+            return
+        }
+        if (newPassword!=confirmPassword) {
+            this.setState({
+                error: 'パスワードが一致しません。'
+            })
+            return
+        }
         this.setState({loading:true});
-        const {email, password, newPassword} = this.state
         var userData = JSON.parse(localStorage.userData);
         var token = userData.token
         var data = JSON.stringify({email:email,password:password, newpassword:newPassword});
@@ -100,6 +126,18 @@ class ChangePassword extends Component{
         .catch((error)=>{
             this.setState({loading:false});
             if (error.response) {
+                if (error.response.data.error=='email') {
+                    this.setState({
+                        error: '現在のメールが正確ではありません。',
+                    })
+                    return;
+                }
+                if (error.response.data.error=='password') {
+                    this.setState({
+                        error: 'パスワードが正しくありません。',
+                    })
+                    return;
+                }
                 if(error.response.status===401){
                     localStorage.removeItem("userData");
                     window.location.assign('/');
@@ -115,7 +153,7 @@ class ChangePassword extends Component{
                 <div className="container">
                     <Header pageName={eval(language).change_password}/>
                     <div className="profile-content">
-                            <form action="">
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="change-password-card">
                                     <p>{eval(language).change_password_description}</p>
                                     <div className={focusEmail || email!=="" ? "login-input-focused change-input-box1" : "change-input-box1"}>
@@ -146,6 +184,7 @@ class ChangePassword extends Component{
                                         <input type="submit" value={eval(language).change} />
                                     </div>
                                 </div>
+                                <p className="error">{this.state.error}</p>
                             </form>
                         </div>
                     <Footer/>

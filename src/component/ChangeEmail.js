@@ -37,7 +37,8 @@ class ChangeEmail extends Component{
             focusnewEmail:false,
             showpassword:false,
             loading:false,
-            language:JSON.parse(localStorage.language).language
+            language:JSON.parse(localStorage.language).language,
+            error: '',
         }
     }
 
@@ -57,7 +58,8 @@ class ChangeEmail extends Component{
 
     handleChange = filedName => e=>{
         this.setState({
-            [filedName]:e.target.value
+            [filedName]:e.target.value,
+            error: ''
         })
     }
 
@@ -69,8 +71,27 @@ class ChangeEmail extends Component{
 
     handleSubmit = (e) =>{
         e.preventDefault();
-        this.setState({loading:true});
         const {currentEmail, passWord, newEmail} = this.state
+        if (currentEmail=='') {
+            this.setState({
+                error: '※必須項目が未入力です。'
+            })
+            return;
+        }
+        if (passWord=='') {
+            this.setState({
+                error: '※必須項目が未入力です。'
+            })
+            return;
+        }
+        if (newEmail=='') {
+            this.setState({
+                error: '※必須項目が未入力です。'
+            })
+            return;
+        }
+        
+        this.setState({loading:true});
         var userData = JSON.parse(localStorage.userData);
         var token = userData.token
         var data = JSON.stringify({email:currentEmail,password:passWord, newemail:newEmail});
@@ -92,6 +113,24 @@ class ChangeEmail extends Component{
         .catch((error)=>{
             this.setState({loading:false});
             if (error.response) {
+                if (error.response.data.error=='email') {
+                    this.setState({
+                        error: '現在のメールが正確ではありません。',
+                    })
+                    return;
+                }
+                if (error.response.data.error=='password') {
+                    this.setState({
+                        error: 'パスワードが正しくありません。',
+                    })
+                    return;
+                }
+                if (error.response.data.error=='newemail') {
+                    this.setState({
+                        error: 'そのメールを利用するユーザーがすでに存在しています。',
+                    })
+                    return;
+                }
                 if(error.response.status===401){
                     localStorage.removeItem("userData");
                     window.location.assign('/');
@@ -123,7 +162,7 @@ class ChangeEmail extends Component{
                             </div>
                             <div className="change-password-card">
                                 <p>{eval(language).new_mail_description}</p>
-                                <div className={focusnewEmail ||newEmail!=="" ? "login-input-focused change-input-box1" : "change-input-box1"}>
+                                <div className={focusnewEmail || newEmail!=="" ? "login-input-focused change-input-box1" : "change-input-box1"}>
                                     <label htmlFor="old-email">{eval(language).newemail}</label>
                                     <input type="email" value={newEmail} onChange={this.handleChange("newEmail")}  onFocus={this.handleFocus("focusnewEmail")} onBlur={this.handleBlur("focusnewEmail")} />
                                 </div>
@@ -133,6 +172,7 @@ class ChangeEmail extends Component{
                                     <input type="submit" value={eval(language).change} />
                                 </div>
                             </div>
+                            <p className="error">{this.state.error}</p>
                         </form>
                     </div>
                     <Footer/>

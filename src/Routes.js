@@ -3,6 +3,8 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Top from './component/Top';
 import Login from './component/Login';
+import ForgotPassword from './component/ForgotPassword';
+import PasswordReset from './component/PasswordRest';
 import Signup from './component/Signup';
 import ProfileUpdate from './component/ProfileUpdate';
 import Terms from './component/Terms';
@@ -46,6 +48,8 @@ class Routes extends React.Component {
             <Switch>
                 <Route exact from="/" component={Top} />
                 <Route exact path='/login' component={Login} />
+                <Route exact path='/forgot_password' component={ForgotPassword} />
+                <Route exact path='/password_reset/' component={PasswordReset} />
                 <Route exact path='/signup' component={Signup} />
                 <Route exact path='/terms' component={Terms} />
                 <Route exact path='/privacy' component={Privacy} />

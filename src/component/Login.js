@@ -178,7 +178,7 @@ class Login extends Component{
                         </div>
                         <button onClick={this.handleSubmit} className="main-button">{eval(language).login}</button>
                         <div className="forgot-password">
-                            <a>{eval(language).forgotpassword}</a>
+                            <a href="/forgot_password">{eval(language).forgotpassword}</a>
                         </div>
                         <div className="create-account">
                             <a href="/signup">{eval(language).signup}</a>
