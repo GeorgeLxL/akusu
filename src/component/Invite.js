@@ -53,6 +53,7 @@ class Invite extends Component{
             invite: false,
             referalcode: '',
             emailModal: false,
+            copied: false,
         }
     }
 
@@ -114,8 +115,16 @@ class Invite extends Component{
         })
     }
 
+    codeCopy =() => {
+        navigator.clipboard.writeText(this.state.referalcode)
+        this.setState({copied: true})
+        setTimeout(() => {
+            this.setState({ copied: false });
+          }, 3000);
+    }
+
     render(){
-        const{language,userPoint,loading, avartar, userName, userType, referalcode, emailModal} = this.state
+        const{language,userPoint,loading, avartar, userName, userType, referalcode, emailModal, copied} = this.state
         return(
             <>
                 <div className="container">
@@ -143,11 +152,13 @@ class Invite extends Component{
                     </div>
                     <div className="invite-container">
                         <h3>友達を招待して、<br />10ポイントを確実にゲットしよう！</h3>
-                        <p>招待コード：<span>{referalcode}</span></p>
+                        <p>招待コード：<span className={copied?"copied":""} onClick={this.codeCopy} >{referalcode}</span></p>
                         <h3>友達を招待する方法</h3>
-                        <p>1.あなたの招待リンクからAKUSHUをダウンロード<br />するように友達に頼む</p>
-                        <p>2.友達があなたの招待コード <span>{referalcode}</span>を入力</p>
-                        <div className="invite-main">
+                        <div>
+                            <p>1.友達のスマートフォンに<br />AKUSHUアプリを入れてもらう。</p>
+                            <p>2.友達があなたの招待コードを入力して登録</p>
+                        </div>
+                        {/* <div className="invite-main">
                             <h4>シェア</h4>
                             <div>
                                 <a>
@@ -185,12 +196,12 @@ class Invite extends Component{
                                     <p>Safari で<br />開く</p>
                                 </a>
                             </div>
-                        </div>
-                        <h3>獲得ポイント：0 &#62;</h3>
+                        </div> */}
+                        {/* <h3>獲得ポイント：0 &#62;</h3> */}
                     </div>
                     <Footer/>
                 </div>
-                <div className={`intro-modal ${emailModal?'intro-modal-show':''}`} onClick={()=>this.setState({emailModal: false})}>
+                {/* <div className={`intro-modal ${emailModal?'intro-modal-show':''}`} onClick={()=>this.setState({emailModal: false})}>
                     <div className="container">
                         <div className="intro-modal-body" onClick={(e)=>e.stopPropagation()}>
                             <h3>{eval(language).intro}</h3>
@@ -198,7 +209,7 @@ class Invite extends Component{
                             <button onClick={()=>this.setState({emailModal: false})} >{eval(language).send}</button>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {loading && <Preloader/>}
             </>
         )
