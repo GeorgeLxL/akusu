@@ -1306,13 +1306,13 @@ input.real-estate-input-input {
 .seminar-card {
     padding: 25px 15px 20px;
     border-bottom: 1px solid #ECECEC;
-    color: black;
+    color: white;
 }
 
 .seminar-card.unread {
     padding: 25px 15px 20px;
     border-bottom: 1px solid #ECECEC;
-    color: black;
+    color: white;
     
 }
 .seminar-card:last-child {
@@ -1845,8 +1845,13 @@ input.real-estate-input-input {
 .verify-card p {
     text-align: center;
 }
-input:-internal-autofill-selected {
+.login-form input:-webkit-autofill,
+.login-form input:-webkit-autofill:hover,
+.login-form input:-webkit-autofill:focus,
+.login-form input:-webkit-autofill:active {
+    transition: background-color 99999s ease-in-out 0s;
     background-color: transparent !important;
+    -webkit-text-fill-color: #fff !important;
 }
 .coming {
     display: flex;

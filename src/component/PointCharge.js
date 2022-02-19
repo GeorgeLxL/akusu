@@ -70,12 +70,12 @@ const PointCharge = () => {
   }
 
   const handlChangePoint = (event)=>{
-    setAmount(parseInt(parseInt(value) * 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    setAmount(parseInt(parseInt(value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     setPoint(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   }
   
   const handleChangeAmount = (event)=>{
-    setPoint(parseInt(parseInt(value1) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    setPoint(parseInt(parseInt(value1)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     setAmount(value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   }
 
@@ -160,26 +160,25 @@ const PointCharge = () => {
     <div className="container">
     <Header pageName="ポイント" />
         <form onSubmit={handleSubmit}>
-            <div className="seminar-card seminar-detail-card">
-                    <h3 style={{color:'black'}}>ポイント</h3>
-                    <div className="time-input-container">
-                        <div className="time-input-box">
-                            <label >ポイント</label>
-                            <input type="text" value={point == 'NaN'? '': point} onChange={handlChangePoint} onKeyDown={handlePointKeyPress} />
-                        </div>
-                        <div className="time-input-box">
-                            <label >JPY</label>
-                            <input type="text" value={amount == 'NaN'? '': amount} onChange={handleChangeAmount} onKeyDown={handleAmountKeyPress} />
-                        </div>
-                    </div>
-                <div className="card-element-container">
-                <CardElement/>
+          <div className="seminar-card seminar-detail-card">
+            <div className="time-input-container">
+                <div className="time-input-box">
+                    <label >ポイント</label>
+                    <input type="text" value={point == 'NaN'? '': point} onChange={handlChangePoint} onKeyDown={handlePointKeyPress} />
                 </div>
-            
-                <div className="profile-input-upload event-input-upload">
-                    <button type="submit">今支払う</button>
+                <div className="time-input-box">
+                    <label >JPY</label>
+                    <input type="text" value={amount == 'NaN'? '': amount} onChange={handleChangeAmount} onKeyDown={handleAmountKeyPress} />
                 </div>
             </div>
+            <div className="card-element-container">
+            <CardElement/>
+            </div>
+        
+            <div className="profile-input-upload event-input-upload">
+                <button type="submit">今支払う</button>
+            </div>
+          </div>
         </form>
     <Footer/>
     </div>

@@ -53,7 +53,7 @@ class Routes extends React.Component {
                 <Route exact path='/signup' component={Signup} />
                 <Route exact path='/terms' component={Terms} />
                 <Route exact path='/privacy' component={Privacy} />
-                {userData ? <Route exact path='/emailverify' component={EmailVerify} />:<Redirect to="/login" />}
+                <Route exact path='/emailverify' component={EmailVerify} />
                 {userData ? <Route exact path='/register' component={ProfileUpdate} />:<Redirect to="/login" />}
                 {userData ? <Route exact path='/home' component={Home}/>:<Redirect to="/login" />}
                 {userData ? <Route exact path='/mypage' component={Mypage} /> : <Redirect to="/login" />}

@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import Preloader from './Layout/preloader';
 import { 
     Button,
@@ -46,7 +47,14 @@ const Transitionalert = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-class Signup extends Component{   
+function Signup() {
+    const history = useHistory()
+    return(
+        <SignupView history={history} />
+    )
+}
+
+class SignupView extends Component{   
     constructor(props) {
         super(props);
         this.state={
@@ -61,7 +69,8 @@ class Signup extends Component{
             password:"",
             erroremail:"",
             errorpassword:"",
-            language:JSON.parse(localStorage.language).language
+            language:JSON.parse(localStorage.language).language,
+            successModal: false,
         }
     }
 
@@ -121,8 +130,7 @@ class Signup extends Component{
         };
         axios(config)
         .then((response)=>{
-            this.setState({loading:false});
-            this.props.history.push('/')
+            this.setState({loading:false, successModal: true});
         })
         .catch((error)=>{
             if(error.response){
@@ -149,8 +157,17 @@ class Signup extends Component{
         });
     }
 
+    successModalClose = e => {
+        this.props.history.push({
+            pathname: '/emailverify',
+            state: {
+                email: this.state.email
+            },
+        })
+    }
+
     render(){
-        const {Alertmodal, alertTitle, alertContent, language, focusemail, focuspassword, email, password, showpassword, erroremail, errorpassword, loading} = this.state
+        const {Alertmodal, alertTitle, alertContent, language, focusemail, focuspassword, email, password, showpassword, erroremail, errorpassword, loading, successModal} = this.state
         return(
             <>
                 <div className="container container1">
@@ -185,9 +202,19 @@ class Signup extends Component{
                             <a href="/login">{eval(language).haveaccount}</a>
                         </div>
                     </div>
-              </div>
-              {loading && <Preloader/>}
-              <Dialog
+                </div>
+                {loading && <Preloader/>}
+                <Dialog
+                    open={successModal}
+                    onClose={this.successModalClose}
+                >
+                    <DialogTitle style={{fontWeight: 'bold'}}>確認コードを送信しました。</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText style={{textAlign: 'center'}}>登録したメールアドレスに確認コードを送信しました。<br />確認後、ログインしてください。</DialogContentText>
+                    </DialogContent>
+                    <a style = {{textAlign: 'center', fontSize: '20px', height: '2em', display: 'block', color: '#3f64ee'}} onClick={this.successModalClose}>OK</a>
+                </Dialog>
+                <Dialog
                     className="alert-modal"
                     open={Alertmodal}
                     TransitionComponent={Transitionalert}

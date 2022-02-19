@@ -63,11 +63,6 @@ class Home extends Component{
     componentDidMount()
     {
         var userData = JSON.parse(localStorage.userData);
-        if(userData.userstatus===0)
-        {
-            this.props.history.push("/emailverify");
-        }
-        
         if(userData.userstatus===1)
         {
             this.props.history.push("/register");
@@ -145,7 +140,7 @@ class Home extends Component{
                 </div>
                 <div className="top-content-spec top-main-link">
                     <div className="top-step-link">
-                        <a href="/prequestion">STEP1.アンケート記入</a>
+                        <a href="/prequestion">ビジネススタート事前登録</a>
                     </div>
                     <div className="top-link-container">
                         <div className="top-link">

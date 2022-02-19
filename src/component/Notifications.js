@@ -131,36 +131,63 @@ class Notifications extends Component{
         })
     
         this.interval = setInterval(() => {
-          var userData = JSON.parse(localStorage.userData);
-          var token = userData.token
-          var config = {
-              method: 'post',
-              url: `${baseurl}/api/getusermessages`,
-              headers: { 
-              'Authorization': 'Bearer ' + token,
-              },
-                  data : {},
-          };
-          axios(config)
-          .then((response) => {
-              this.setState({
-                messages:response.data.messages,
-                avatar: response.data.avatar
-              });
-              console.log(JSON.parse(response.data.messages))
-          })
-          .catch((error)=>{
-              this.setState({
-                  loading:false
-              })
-              if (error.response) {
-                  if(error.response.status===401){
-                      localStorage.removeItem("userData");
-                      window.location.assign('/');
-                  }
-              }
-          })
+            var userData = JSON.parse(localStorage.userData);
+            var token = userData.token
+            var config = {
+                method: 'post',
+                url: `${baseurl}/api/getusermessages`,
+                headers: { 
+                'Authorization': 'Bearer ' + token,
+                },
+                    data : {},
+            };
+            axios(config)
+            .then((response) => {
+                this.setState({
+                    messages:response.data.messages,
+                    avatar: response.data.avatar
+                });
+                this.setMessageRead()
+            })
+            .catch((error)=>{
+                this.setState({
+                    loading:false
+                })
+                if (error.response) {
+                    if(error.response.status===401){
+                        localStorage.removeItem("userData");
+                        window.location.assign('/');
+                    }
+                }
+            })
         },5000)
+    }
+
+    setMessageRead() {
+        var userData = JSON.parse(localStorage.userData);
+        var token = userData.token
+        var config = {
+            method: 'post',
+            url: `${baseurl}/api/setmessagesread`,
+            headers: { 
+                'Authorization': 'Bearer ' + token,
+            },
+            data : {},
+        };
+        axios(config)
+        .then((response) => {
+        })
+        .catch((error)=>{
+            this.setState({
+                loading:false
+            })
+            if (error.response) {
+                if(error.response.status===401){
+                    localStorage.removeItem("userData");
+                    window.location.assign('/');
+                }
+            }
+        })
     }
 
     handleChangeMessage = filedName => e=>{
@@ -182,13 +209,13 @@ class Notifications extends Component{
         fd.append('user', 'user')
         fd.append('photo', null)
         var config = {
-          method: 'post',
-          url: `${baseurl}/api/sendmessage`,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token,
-          },
-          data : fd
+            method: 'post',
+            url: `${baseurl}/api/sendmessage`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
+            },
+            data : fd
         };
         axios(config)
         .then((response)=>{
@@ -215,8 +242,8 @@ class Notifications extends Component{
             method: 'post',
             url: `${baseurl}/api/sendmessage`,
             headers: { 
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token,
             },
             data: fd
         };
@@ -253,7 +280,6 @@ class Notifications extends Component{
                                         <div key={index}  className={notification.fields.readStatus ? "notification-main" : "notification-main unread"}>
                                             <p>{(new Date(notification.fields.created_at)).getFullYear().toString() + '年' + ((new Date(notification.fields.created_at)).getMonth()+1).toString() + '月' + (new Date(notification.fields.created_at)).getDate().toString() + '日'}</p>
                                             <p>{notification.fields.content}</p>
-                                            
                                         </div>
                                     ))}
                                 </div>

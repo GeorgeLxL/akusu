@@ -19,8 +19,47 @@ class SendPoint extends Component{
             value1: '',
             error_receptance:"",
             error_point:"",
-            loading:false
+            loading:false,
+            totalPoint: '',
         }
+    }
+
+    componentDidMount(){
+        this.getUserdata()
+    }
+
+    getUserdata()
+    {
+        var userData = JSON.parse(localStorage.userData);
+        var token = userData.token
+        var config = {
+            method: 'get',
+            url: `${baseurl}/api/account/getProfile`,
+            headers: { 
+            'Authorization': 'Bearer ' + token,
+            },
+                data : {},
+        };
+        axios(config)
+        .then((response) => {
+            var userData = response.data.user;
+            var srcBase64 = userData.userAvatar;
+            this.setState({
+                loading:false,
+                totalPoint: userData.userPoint,
+            })
+        })
+        .catch((error)=>{
+            this.setState({
+                loading:false
+            })
+            if (error.response) {
+                if(error.response.status===401){
+                    localStorage.removeItem("userData");
+                    window.location.assign('/');
+                }
+            }
+        })
     }
 
     handlChangeSendPoint =  e =>{
@@ -74,6 +113,7 @@ class SendPoint extends Component{
                 this.setState({value: this.state.value.slice(0, -1)});
             }
         }
+        if (parseFloat(this.state.value) > parseFloat(this.state.totalPoint)) this.setState({value: ((this.state.totalPoint).toString())})
     }
     
     handleReceiveKeyPress = e => {
@@ -112,6 +152,7 @@ class SendPoint extends Component{
                 this.setState({value1: this.state.value1.slice(0, -1)});
             }
         }
+        if (parseFloat(this.state.value1 / 0.973) > parseFloat(this.state.totalPoint)) this.setState({value1: (parseInt(this.state.totalPoint * 0.973)).toString()})
     }
 
     handleChange = filedName => e=>{
@@ -187,13 +228,13 @@ class SendPoint extends Component{
     }
 
     render(){
-        const {email, sendpoint, receivepoint,error_point, error_receptance, loading} = this.state
-
+        const {email, sendpoint, receivepoint,error_point, error_receptance, loading, totalPoint} = this.state
         return(
             <>
                 <div className="container">
                     <Header pageName="ポイント送信"/>
                         <div className="seminar-card seminar-detail-card">
+                        <h2 style={{marginBottom: '1em'}}>現在の保有ポイント : {totalPoint}</h2>
                         <form onSubmit={this.handleSubmit}>
                             <div className="profile-input-box">
                                 <div className="profile-title">
