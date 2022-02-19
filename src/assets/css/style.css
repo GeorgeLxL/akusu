@@ -2645,7 +2645,12 @@ iframe {
 .notification-main-container {
     padding-top: 10px;
     height: 85px;
-    overflow-y: scroll;
+    overflow-x: auto;
+}
+.notification-main-container >div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 .notification-main-container::-webkit-scrollbar {
     width: 8px;
@@ -2662,6 +2667,7 @@ iframe {
     padding: 10px 15px 5px;
     font-size: 14px;
     white-space: nowrap;
+    overflow-y: scroll;
 }
 .notification-main p {
     margin-right: 5px;

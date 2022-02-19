@@ -276,12 +276,14 @@ class Notifications extends Component{
                             <div className="notification-card">
                                 <h3>お知らせ一覧</h3>
                                 <div className="notification-main-container">
-                                    {notifications.map((notification, index)=>(
-                                        <div key={index}  className={notification.fields.readStatus ? "notification-main" : "notification-main unread"}>
-                                            <p>{(new Date(notification.fields.created_at)).getFullYear().toString() + '年' + ((new Date(notification.fields.created_at)).getMonth()+1).toString() + '月' + (new Date(notification.fields.created_at)).getDate().toString() + '日'}</p>
-                                            <p>{notification.fields.content}</p>
-                                        </div>
-                                    ))}
+                                    <div>
+                                        {notifications.map((notification, index)=>(
+                                            <div key={index}  className={notification.fields.readStatus ? "notification-main" : "notification-main unread"}>
+                                                <p>{(new Date(notification.fields.created_at)).getFullYear().toString() + '年' + ((new Date(notification.fields.created_at)).getMonth()+1).toString() + '月' + (new Date(notification.fields.created_at)).getDate().toString() + '日'}</p>
+                                                <p>{notification.fields.content}</p>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
