@@ -12,8 +12,6 @@ const PointCharge = () => {
   const elements = useElements();
   const [amount, setAmount] = useState('');
   const [point, setPoint] = useState('');
-  const [value, setValue] = useState('')
-  const [value1, setValue1] = useState('')
   const [loading, setLoading] = useState(false);
   
   const handleSubmit = async (event) => {
@@ -69,90 +67,14 @@ const PointCharge = () => {
     })
   }
 
-  const handlChangePoint = (event)=>{
-    setAmount(parseInt(parseInt(value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-    setPoint(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+  const handlChangePoint = (e) =>{
+    setPoint((e.target.value.replace(/,/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+    setAmount((e.target.value.replace(/,/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
   }
   
-  const handleChangeAmount = (event)=>{
-    setPoint(parseInt(parseInt(value1)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-    setAmount(value1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-  }
-
-  const handlePointKeyPress = (e) => {
-    if (e.keyCode == 48 || e.keyCode == 96) {
-      setValue(value.toString() + '0')
-    }
-    if (e.keyCode == 49 || e.keyCode == 97) {
-      setValue(value.toString() + '1')
-    }
-    if (e.keyCode == 50 || e.keyCode == 98) {
-      setValue(value.toString() + '2')
-    }
-    if (e.keyCode == 51 || e.keyCode == 99) {
-      setValue(value.toString() + '3')
-    }
-    if (e.keyCode == 52 || e.keyCode == 100) {
-      setValue(value.toString() + '4')
-    }
-    if (e.keyCode == 53 || e.keyCode == 101) {
-      setValue(value.toString() + '5')
-    }
-    if (e.keyCode == 54 || e.keyCode == 102) {
-      setValue(value.toString() + '6')
-    }
-    if (e.keyCode == 55 || e.keyCode == 103) {
-      setValue(value.toString() + '7')
-    }
-    if (e.keyCode == 56 || e.keyCode == 104) {
-      setValue(value.toString() + '8')
-    }
-    if (e.keyCode == 57 || e.keyCode == 105) {
-      setValue(value.toString() + '9')
-    }
-    if (e.keyCode == 8) {
-      if (value != '') {
-        setValue(value.slice(0, -1));
-      }
-    }
-  }
-
-  const handleAmountKeyPress = (e) => {
-    if (e.keyCode == 48 || e.keyCode == 96) {
-      setValue1(value1.toString() + '0')
-    }
-    if (e.keyCode == 49 || e.keyCode == 97) {
-      setValue1(value1.toString() + '1')
-    }
-    if (e.keyCode == 50 || e.keyCode == 98) {
-      setValue1(value1.toString() + '2')
-    }
-    if (e.keyCode == 51 || e.keyCode == 99) {
-      setValue1(value1.toString() + '3')
-    }
-    if (e.keyCode == 52 || e.keyCode == 100) {
-      setValue1(value1.toString() + '4')
-    }
-    if (e.keyCode == 53 || e.keyCode == 101) {
-      setValue1(value1.toString() + '5')
-    }
-    if (e.keyCode == 54 || e.keyCode == 102) {
-      setValue1(value1.toString() + '6')
-    }
-    if (e.keyCode == 55 || e.keyCode == 103) {
-      setValue1(value1.toString() + '7')
-    }
-    if (e.keyCode == 56 || e.keyCode == 104) {
-      setValue1(value1.toString() + '8')
-    }
-    if (e.keyCode == 57 || e.keyCode == 105) {
-      setValue1(value1.toString() + '9')
-    }
-    if (e.keyCode == 8) {
-      if (value1 != '') {
-        setValue1(value1.slice(0, -1));
-      }
-    }
+  const handleChangeAmount = (e) =>{
+    setPoint((e.target.value.replace(/,/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+    setAmount((e.target.value.replace(/,/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
   }
 
   return (
@@ -164,11 +86,11 @@ const PointCharge = () => {
             <div className="time-input-container">
                 <div className="time-input-box">
                     <label >ポイント</label>
-                    <input type="text" value={point == 'NaN'? '': point} onChange={handlChangePoint} onKeyDown={handlePointKeyPress} />
+                    <input type="text" value={point == 'NaN'? '': point} onChange={handlChangePoint}/>
                 </div>
                 <div className="time-input-box">
                     <label >JPY</label>
-                    <input type="text" value={amount == 'NaN'? '': amount} onChange={handleChangeAmount} onKeyDown={handleAmountKeyPress} />
+                    <input type="text" value={amount == 'NaN'? '': amount} onChange={handleChangeAmount}/>
                 </div>
             </div>
             <div className="card-element-container">

@@ -17,7 +17,6 @@ function ScanAmount() {
     const [loading, setLoading] = useState(false);
     const [totalPoint, settotalPoint] = useState(0);
     const [sendPoint, setSendPoint] = useState('');
-    const [value, setValue] = useState('')
     const [errorReceiver, setErrorReceiver] = useState('');
     const [errorPoint, setErrorPoint] = useState('');
     const [receiver, setReceiver] = useState('');
@@ -60,47 +59,10 @@ function ScanAmount() {
     }
 
     const handlChangeSendPoint = (e) =>{
-        setSendPoint(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-    }
-
-    
-    const handlePointKeyPress = (e) => {
-        if (e.keyCode == 48 || e.keyCode == 96) {
-            setValue(value.toString() + '0')
+        setSendPoint((e.target.value.replace(/,/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+        if (parseInt(e.target.value.replace(/,/g, "")) > totalPoint) {
+            setSendPoint(totalPoint.replace(/\B(?=(\d{3})+(?!\d))/g, ","))
         }
-        if (e.keyCode == 49 || e.keyCode == 97) {
-            setValue(value.toString() + '1')
-        }
-        if (e.keyCode == 50 || e.keyCode == 98) {
-            setValue(value.toString() + '2')
-        }
-        if (e.keyCode == 51 || e.keyCode == 99) {
-            setValue(value.toString() + '3')
-        }
-        if (e.keyCode == 52 || e.keyCode == 100) {
-            setValue(value.toString() + '4')
-        }
-        if (e.keyCode == 53 || e.keyCode == 101) {
-            setValue(value.toString() + '5')
-        }
-        if (e.keyCode == 54 || e.keyCode == 102) {
-            setValue(value.toString() + '6')
-        }
-        if (e.keyCode == 55 || e.keyCode == 103) {
-            setValue(value.toString() + '7')
-        }
-        if (e.keyCode == 56 || e.keyCode == 104) {
-            setValue(value.toString() + '8')
-        }
-        if (e.keyCode == 57 || e.keyCode == 105) {
-            setValue(value.toString() + '9')
-        }
-        if (e.keyCode == 8) {
-            if (value != '') {
-                setValue(value.slice(0, -1));
-            }
-        }
-        if (parseFloat(value) > parseFloat(totalPoint)) setValue(totalPoint.toString());
     }
 
     const sendPointConfirm = (e) => {
@@ -172,7 +134,7 @@ function ScanAmount() {
                             <h4>現在の保有ポイント : {totalPoint}</h4>
                             <div className="time-input-box">
                                 <label >送信ポイント</label>
-                                <input type="text" value={sendPoint == 'NaN'? '': sendPoint} onChange={handlChangeSendPoint}  onKeyDown={handlePointKeyPress} />
+                                <input type="text" value={sendPoint == 'NaN'? '': sendPoint} onChange={handlChangeSendPoint} />
                             </div>
                             <span className="error">{errorReceiver}</span>
                             <span className="error">{errorPoint}</span>
