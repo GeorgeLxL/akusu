@@ -171,6 +171,7 @@ class SignupView extends Component{
         return(
             <>
                 <div className="container container1">
+                    <div className="container-main">
                     <div className="main-title">
                         <img src="/assets/image/logo.png" />
                         <h2>{eval(language).welcome}</h2>
@@ -201,6 +202,7 @@ class SignupView extends Component{
                         <div className="create-account">
                             <a href="/login">{eval(language).haveaccount}</a>
                         </div>
+                    </div>
                     </div>
                 </div>
                 {loading && <Preloader/>}

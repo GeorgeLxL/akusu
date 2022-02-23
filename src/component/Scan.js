@@ -92,6 +92,7 @@ function Scan() {
     return(
         <>
             <div className="container">
+                    <div className="container-main">
                 <Header pageName="バーコードで送受信"/>
                     <div className="seminar-detail-card">
                         <div className='scan'>
@@ -104,6 +105,7 @@ function Scan() {
                         </div>
                     </div>
                 <Footer/>
+                </div>
             </div>
             {loading && <Preloader/> }
         </>

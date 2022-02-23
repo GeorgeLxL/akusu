@@ -105,6 +105,7 @@ class StoreDetail extends Component{
         return(
         <>
             <div className="container">
+                <div className="container-main">
                 <Header notback={false} pageName={eval(language).store}/>
                 <div className="top-profile">
                     <div className="top-profile-img">
@@ -145,6 +146,7 @@ class StoreDetail extends Component{
                       <Route exact path='/store/company/guide' component={StoreGuide} />
                 </Switch> 
                 <Footer/>
+                </div>
             </div>
             {loading &&
                 <Preloader/>

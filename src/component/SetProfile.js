@@ -38,6 +38,7 @@ class SetProfile extends Component
         const { language } = this.state
         return(
         <div className="container">
+        <div className="container-main">
             <Header pageName={eval(language).account_setting}/>
             <div className="seminar-card-container">
                 <div className="seminar-card">
@@ -55,6 +56,7 @@ class SetProfile extends Component
                 </div>
             </div>
             <Footer/>
+            </div>
         </div>
         )
     }

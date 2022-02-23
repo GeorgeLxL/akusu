@@ -102,6 +102,7 @@ class RealEstate extends Component{
         return(
             <>
                 <div className="container">
+                    <div className="container-main">
                     <Header pageName="不動産​" />
                     <div className="real-container">
                         <div className="real-detail-link">
@@ -118,6 +119,7 @@ class RealEstate extends Component{
                             <Route exact path='/real_estate/guide' component={RealEstateGuide} />
                         </Switch>
                     <Footer/>
+                    </div>
                 </div>
                 {loading && <Preloader/>}
             </>

@@ -116,6 +116,7 @@ class Home extends Component{
         return(
         <>
             <div className="container">
+                <div className='container-main'>
                 <Header notback={true} Intro={invite} pageName={eval(language).home}/>
                 <div className="top-profile">
                     <div className="top-profile-img">
@@ -212,8 +213,8 @@ class Home extends Component{
                         </div>
                     </div>
                 </div>
-                
                 <Footer/>
+                </div>
             </div>
             {loading &&
                 <Preloader/>

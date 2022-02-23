@@ -160,6 +160,7 @@ class ApplyEvent extends Component{
         return(
             <>
                  <div className="container">
+                    <div className="container-main">
                     <Header pageName="イベント申し込み"/>
                     <div className="seminar-card-container">
                         <div className="seminar-card">
@@ -234,6 +235,7 @@ class ApplyEvent extends Component{
                         </div>
                     </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading &&
                     <Preloader/>

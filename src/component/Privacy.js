@@ -8,6 +8,7 @@ class Terms extends Component{
        
         return(
             <div className="container privacy-container">
+                <div className="container-main">
                 <header>
                     <div className="content">
                         <button onClick={() => this.props.history.goBack()} className="back-button">
@@ -99,6 +100,7 @@ class Terms extends Component{
                     <h4>第10条（お問い合わせ窓口）</h4>
                     本ポリシーに関するお問い合わせは、お問い合わせフォームからお願いいたします。
                 </div>
+            </div>
             </div>
         )
     }

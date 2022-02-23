@@ -145,6 +145,7 @@ class ChangeEmail extends Component{
         return(
             <>
                 <div className="container">
+                    <div className="container-main">
                     <Header pageName={eval(language).mail_change}/>
                     <div className="profile-content">
                         <form onSubmit={this.handleSubmit}>
@@ -176,6 +177,7 @@ class ChangeEmail extends Component{
                         </form>
                     </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading &&
                     <Preloader/>

@@ -269,7 +269,8 @@ class Notifications extends Component{
         const {loading, notifications, messages, avatar} = this.state
         return(
             <>
-                <div className="container" onScroll={this.handleScroll}>
+                <div className="container">
+                    <div className="container-main">
                     <Header pageName="お知らせ"/>
                     <div className="notification-container-main">
                         <div className="notification-container notification-container-spec">
@@ -328,6 +329,7 @@ class Notifications extends Component{
                     </div>
                     
                     <Footer/>
+                    </div>
                 </div>
                 {loading &&
                     <Preloader/>

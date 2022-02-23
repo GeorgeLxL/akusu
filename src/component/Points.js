@@ -95,48 +95,50 @@ class Points extends Component{
         return(
             <>
             <div className="container">
-                <Header pageName="ポイント" />
-                    <div className="top-content-spec">
-                        <div className="top-foot">
-                            <div className="top-foot-main">
-                                <div className="top-foot-main-link">
-                                    <a href="/comingsoon">
-                                        <div><img src="./assets/image/top-foot-link1.png" alt="" /></div>
-                                        <p>{eval(language).scan}</p>
-                                    </a>
-                                    <a href="/sendPoint">
-                                        <div><img src="./assets/image/top-foot-link2.png" alt="" /></div>
-                                        <p>{eval(language).send_receive}</p>
-                                    </a>
-                                    <a href="/comingsoon">
-                                        <div><img src="./assets/image/top-foot-link3.png" alt="" /></div>
-                                        <p>{eval(language).save}</p>
-                                    </a>
-                                    <a href="/pointCharge">
-                                        <div><img src="./assets/image/top-foot-link4.png" alt="" /></div>
-                                        <p>{eval(language).charge}</p>
-                                    </a>
-                                </div>
-                                <div className="top-foot-point">
-                                    <img src="./assets/image/top-foot-point.png" alt="" />
-                                    <div className="top-foot-point-text">
-                                        <h4>{eval(language).owned_point}</h4>
-                                        <p>
-                                            {userPoint}
-                                            <span>pt</span>
-                                        </p>
+                <div className="container-main">
+                    <Header pageName="ポイント" />
+                        <div className="top-content-spec">
+                            <div className="top-foot">
+                                <div className="top-foot-main">
+                                    <div className="top-foot-main-link">
+                                        <a href="/comingsoon">
+                                            <div><img src="./assets/image/top-foot-link1.png" alt="" /></div>
+                                            <p>{eval(language).scan}</p>
+                                        </a>
+                                        <a href="/sendPoint">
+                                            <div><img src="./assets/image/top-foot-link2.png" alt="" /></div>
+                                            <p>{eval(language).send_receive}</p>
+                                        </a>
+                                        <a href="/comingsoon">
+                                            <div><img src="./assets/image/top-foot-link3.png" alt="" /></div>
+                                            <p>{eval(language).save}</p>
+                                        </a>
+                                        <a href="/pointCharge">
+                                            <div><img src="./assets/image/top-foot-link4.png" alt="" /></div>
+                                            <p>{eval(language).charge}</p>
+                                        </a>
+                                    </div>
+                                    <div className="top-foot-point">
+                                        <img src="./assets/image/top-foot-point.png" alt="" />
+                                        <div className="top-foot-point-text">
+                                            <h4>{eval(language).owned_point}</h4>
+                                            <p>
+                                                {userPoint}
+                                                <span>pt</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="top-foot-top">
-                                <div><img src="./assets/image/logo1.png" alt="" /></div>
-                                <div><img src="./assets/image/qr-code1.png" alt="" /></div>
+                                <div className="top-foot-top">
+                                    <div><img src="./assets/image/logo1.png" alt="" /></div>
+                                    <div><img src="./assets/image/qr-code1.png" alt="" /></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <Footer/>
                 </div>
-                {loading && <Preloader/>}
+            </div>
+            {loading && <Preloader/>}
             </>
         )
     }

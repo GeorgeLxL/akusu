@@ -350,6 +350,7 @@ class ProfileUpdate extends Component{
         return(
             <>
             <div className="container">
+            <div className="container-main">
             {this.props.footer ? <Header pageName={eval(language).accoutnsetting}/>:
                 <header>
                     <div className="content">
@@ -578,6 +579,7 @@ class ProfileUpdate extends Component{
                 </form>
             </div>
             {this.props.footer && <Footer/>}
+            </div>
         </div>
         <div className={`intro-modal ${referalCodeModal?'intro-modal-show':''}`} onClick={()=>this.setState({referalCodeModal: false})}>
             <div className="container">

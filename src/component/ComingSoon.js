@@ -24,11 +24,13 @@ class ComingSoon extends Component
         const { language } = this.state
         return(
         <div class="container">
-            <Header  pageName={eval(language).coming_soon}/>
-            <div class="coming">
-                <h2>Coming <br/><span>soon!</span></h2>
+            <div className="container-main">
+                <Header  pageName={eval(language).coming_soon}/>
+                <div class="coming">
+                    <h2>Coming <br/><span>soon!</span></h2>
+                </div>
+                <Footer/>
             </div>
-            <Footer/>
         </div>
         )
     }

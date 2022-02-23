@@ -128,6 +128,7 @@ class Invite extends Component{
         return(
             <>
                 <div className="container">
+                    <div className="container-main">
                     <Header pageName={eval(language).invite} />
                     <div className="top-profile">
                         <div className="top-profile-img">
@@ -200,6 +201,7 @@ class Invite extends Component{
                         {/* <h3>獲得ポイント：0 &#62;</h3> */}
                     </div>
                     <Footer/>
+                    </div>
                 </div>
                 {/* <div className={`intro-modal ${emailModal?'intro-modal-show':''}`} onClick={()=>this.setState({emailModal: false})}>
                     <div className="container">

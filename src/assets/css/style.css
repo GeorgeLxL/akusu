@@ -44,7 +44,7 @@ input, select {
 }
 
 #tsparticles {
-    position: fixed;
+    position: absolute;
     z-index: -1;
     top: 0;
     bottom: 0;
@@ -54,7 +54,7 @@ input, select {
 }
 
 .main-logo {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
@@ -75,10 +75,17 @@ input, select {
     margin: auto;
     position: relative;
     height: 100%;
+    width: 100%;
+}
+.container-main {
     overflow-y: scroll;
+    height: 100%;
     padding-bottom: 108px;
 }
 .container1 {
+    padding-bottom: 0;
+}
+.container1 .container-main {
     padding-bottom: 0;
 }
 ::-webkit-scrollbar {
@@ -90,7 +97,7 @@ input, select {
 }
 
 .preloader {
-    position: fixed;
+    position: absolute;
     z-index: 9999;
     top: 0;
     bottom: 0;
@@ -741,7 +748,7 @@ header .content .more-button {
 }
 
 footer {
-    position: fixed;
+    position: absolute;
     z-index: 10;
     width: 100%;
     height: 65px;

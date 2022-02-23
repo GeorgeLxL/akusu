@@ -95,7 +95,8 @@ class MoneySeminar extends Component{
         const {loading, eventList, activeTab} = this.state
         return(
             <>
-                <div className="container" onScroll={this.handleScroll}>
+                <div className="container">
+                    <div className="container-main" onScroll={this.handleScroll}>
                     <Header pageName="お金のセミナー"/>
                     {/* <div>
                         <div className="seminar-card" style={{textAlign:'right'}}>
@@ -114,6 +115,7 @@ class MoneySeminar extends Component{
                         <Route exact path='/money_seminar/list' component={MoneySeminarList} />
                     </Switch>
                     <Footer/>
+                    </div>
                 </div>
                 {loading &&
                     <Preloader/>

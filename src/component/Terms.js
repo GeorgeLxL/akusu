@@ -9,6 +9,7 @@ class Terms extends Component{
        
         return(
             <div className="container privacy-container">
+            <div className="container-main">
                 <header>
                     <div className="content">
                         <button onClick={() => this.props.history.goBack()} className="back-button">
@@ -188,6 +189,7 @@ class Terms extends Component{
                     <h4>第２２条（自己責任原則）</h4>
                     会員各自の判断に基づく結果として損失が生じた場合につきましては当社としては一切の責任を負いかねますのでご了承下さいますようお願い申し上げます。
                 </div>
+            </div>
         </div>
         )
     }

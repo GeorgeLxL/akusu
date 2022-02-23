@@ -23,6 +23,7 @@ function ScanSendSuccess() {
     return(
         <>
             <div className="container">
+                <div className="container-main">
                 <Header pageName="成功"/>
                     <div className="seminar-detail-card">
                         <div className='scan'>
@@ -45,6 +46,7 @@ function ScanSendSuccess() {
                         </div>
                     </div>
                 <Footer/>
+                </div>
             </div>
             {loading && <Preloader/> }
         </>

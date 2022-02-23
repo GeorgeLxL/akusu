@@ -91,6 +91,7 @@ class EmailVerifyView extends Component{
        
         return(
             <div className="container">
+                <div className="container-main">
                 <div className="seminar-card seminar-detail-card">
                     <form onSubmit={this.handleSubmit}>
                             <div className="profile-input-box">
@@ -98,7 +99,7 @@ class EmailVerifyView extends Component{
                                     <h3>検証コード</h3>
                                 </div>
                                 <div className="profile-input-container">
-                                    <input style={{width:'100%'}} className="profile-input-input profile-input-input1" type="number" value={this.state.verifyCode}  onChange={this.handleChange("verifyCode")} />
+                                    <input style={{width:'100%'}} className="profile-input-input" type="number" value={this.state.verifyCode}  onChange={this.handleChange("verifyCode")} />
                                 </div>
                                 <span className="error">{this.state.error_verificationcode}</span>
                             </div>
@@ -108,6 +109,7 @@ class EmailVerifyView extends Component{
                                 <button onClick={this.handleResendCode} type="button">再送信</button>
                             </div>
                     </form>
+                </div>
                 </div>
             </div>
         )

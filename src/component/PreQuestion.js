@@ -136,6 +136,7 @@ class PreQuestion extends Component{
         return(
             <>
                 <div className="container">
+                    <div className="container-main">
                     <Header pageName="事前アンケート" />
                     <div className="top-content-spec top-main-link prequestion-container">
                         <h3>まずは下記の簡単なアンケートにお答え下さい。</h3>
@@ -199,6 +200,7 @@ class PreQuestion extends Component{
                         <p className="error-hissu">{error}</p>
                     </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading && <Preloader/>}
             </>

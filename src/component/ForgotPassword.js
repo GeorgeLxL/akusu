@@ -133,6 +133,7 @@ class ForgotPassword extends Component{
         return(
             <>
                 <div className="container container1">
+                    <div className="container-main">
                     <div className="main-title">
                         <img src="/assets/image/logo.png" />
                         <h2>{eval(language).password_reset}</h2>
@@ -153,7 +154,7 @@ class ForgotPassword extends Component{
                             </div>
                         </div>
                     }
-                    
+                    </div>
                 </div>
                 {loading && <Preloader/>}
                 

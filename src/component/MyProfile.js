@@ -169,87 +169,89 @@ class MyProfile extends Component{
         return(
             <>
             <div className="container">
-            <Header pageName={eval(language).accoutnsetting}/>
-            <div className="seminar-card-container">
-                    <div className="seminar-card">
-                    
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).name}<span className="hissu">{eval(language).mandatory}</span></h3>
+                <div className="container-main">
+                    <Header pageName={eval(language).accoutnsetting}/>
+                    <div className="seminar-card-container">
+                        <div className="seminar-card">
+                        
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).name}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{surname + lastname}</p>
                             </div>
-                            <p>{surname + lastname}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).name_freegana}<span className="hissu">{eval(language).mandatory}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).name_freegana}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{surnameFurigana + lastnameFurigana}</p>
                             </div>
-                            <p>{surnameFurigana + lastnameFurigana}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).maiden_name}<span className="nini">{eval(language).any}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).maiden_name}<span className="nini">{eval(language).any}</span></h3>
+                                </div>
+                                <p>{maidenname}</p>
                             </div>
-                            <p>{maidenname}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).gender}<span className="hissu">{eval(language).mandatory}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).gender}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{gender==="1" ? eval(language).female : eval(language).male}</p>
                             </div>
-                            <p>{gender==="1" ? eval(language).female : eval(language).male}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).phone_number}<span className="hissu">{eval(language).mandatory}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).phone_number}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{phone}</p>
                             </div>
-                            <p>{phone}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).birthday}<span className="hissu">{eval(language).mandatory}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).birthday}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{birthday}</p>
                             </div>
-                            <p>{birthday}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).avatar}<span className="nini">{eval(language).any}</span></h3>
-                                <p>{eval(language).avartar_description}</p>
-                            </div>
-                            <div className="profile-img">
-                                <div>
-                                    <img src={avatarimg==='' ? './assets/image/avatar.svg' : avatarimg} alt=""/>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).avatar}<span className="nini">{eval(language).any}</span></h3>
+                                    <p>{eval(language).avartar_description}</p>
+                                </div>
+                                <div className="profile-img">
+                                    <div>
+                                        <img src={avatarimg==='' ? './assets/image/avatar.svg' : avatarimg} alt=""/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="seminar-card">
-                        <h3>{eval(language).address}</h3>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).prefectures}<span className="hissu">{eval(language).mandatory}</span></h3>
+                        <div className="seminar-card">
+                            <h3>{eval(language).address}</h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).prefectures}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{address1}</p>
                             </div>
-                            <p>{address1}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).municipalities}<span className="hissu">{eval(language).mandatory}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).municipalities}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{address2}</p>
                             </div>
-                            <p>{address2}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).street_number}<span className="hissu">{eval(language).mandatory}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).street_number}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                </div>
+                                <p>{street}</p>
                             </div>
-                            <p>{street}</p>
-                        </div>
-                        <div className="profile-box">
-                            <div className="profile-title">
-                                <h3>{eval(language).building_number}<span className="nini">{eval(language).any}</span></h3>
+                            <div className="profile-box">
+                                <div className="profile-title">
+                                    <h3>{eval(language).building_number}<span className="nini">{eval(language).any}</span></h3>
+                                </div>
+                                <p>{buildingName}</p>
                             </div>
-                            <p>{buildingName}</p>
                         </div>
-                    </div>
+                </div>
+                <Footer/>
             </div>
-            <Footer/>
         </div>
          {loading &&
             <Preloader/>

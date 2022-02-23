@@ -91,6 +91,7 @@ class EventList extends Component{
         return(
             <>
                 <div className="container" onScroll={this.handleScroll}>
+                    <div className="container-main">
                     <Header pageName="セミナー・イベント"/>
                     <div className="seminar-card-container" >
                         <div className="seminar-card" style={{textAlign:'right'}}>
@@ -112,6 +113,7 @@ class EventList extends Component{
                             
                     </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading &&
                     <Preloader/>

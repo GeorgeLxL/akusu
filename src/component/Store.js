@@ -97,6 +97,7 @@ class Store extends Component{
         return(
         <>
             <div className="container">
+                <div className="container-main">
                 <Header notback={false} pageName={eval(language).store}/>
                 <div className="top-profile">
                     <div className="top-profile-img">
@@ -128,6 +129,7 @@ class Store extends Component{
                     <a href="/store/company" className="real-link">居抜きBank.com</a>
                 </div>
                 <Footer/>
+                </div>
             </div>
             {loading &&
                 <Preloader/>

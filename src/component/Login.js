@@ -152,6 +152,7 @@ class Login extends Component{
         return(
             <>
                 <div className="container container1">
+                    <div className="container-main">
                     <div className="main-title">
                         <img src="/assets/image/logo.png" />
                         <h2>{eval(language).login}</h2>
@@ -183,6 +184,7 @@ class Login extends Component{
                         <div className="create-account">
                             <a href="/signup">{eval(language).signup}</a>
                         </div>
+                    </div>
                     </div>
                 </div>
                 {loading && <Preloader/>}

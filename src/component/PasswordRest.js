@@ -206,6 +206,7 @@ class PasswordReset extends Component{
         return(
             <>
                 <div className="container container1">
+                    <div className="container-main">
                     <div className="main-title">
                         <img src="/assets/image/logo.png" />
                         <h2>{eval(language).password_reset}</h2>
@@ -238,7 +239,7 @@ class PasswordReset extends Component{
                             <button style={{marginTop: '2em'}} onClick={this.verify} className="main-button">{eval(language).confirmCode}</button>
                         </div>
                     }
-                    
+                    </div>
                 </div>
                 {loading && <Preloader/>}
             </>

@@ -80,29 +80,31 @@ const PointCharge = () => {
   return (
     <>
     <div className="container">
-    <Header pageName="ポイント" />
-        <form onSubmit={handleSubmit}>
-          <div className="seminar-card seminar-detail-card">
-            <div className="time-input-container">
-                <div className="time-input-box">
-                    <label >ポイント</label>
-                    <input type="text" value={point == 'NaN'? '': point} onChange={handlChangePoint}/>
-                </div>
-                <div className="time-input-box">
-                    <label >JPY</label>
-                    <input type="text" value={amount == 'NaN'? '': amount} onChange={handleChangeAmount}/>
-                </div>
+      <div className="container-main">
+        <Header pageName="ポイント" />
+          <form onSubmit={handleSubmit}>
+            <div className="seminar-card seminar-detail-card">
+              <div className="time-input-container">
+                  <div className="time-input-box">
+                      <label >ポイント</label>
+                      <input type="text" value={point == 'NaN'? '': point} onChange={handlChangePoint}/>
+                  </div>
+                  <div className="time-input-box">
+                      <label >JPY</label>
+                      <input type="text" value={amount == 'NaN'? '': amount} onChange={handleChangeAmount}/>
+                  </div>
+              </div>
+              <div className="card-element-container">
+              <CardElement/>
+              </div>
+          
+              <div className="profile-input-upload event-input-upload">
+                  <button type="submit">今支払う</button>
+              </div>
             </div>
-            <div className="card-element-container">
-            <CardElement/>
-            </div>
-        
-            <div className="profile-input-upload event-input-upload">
-                <button type="submit">今支払う</button>
-            </div>
-          </div>
-        </form>
-    <Footer/>
+          </form>
+        <Footer/>
+      </div>
     </div>
     {loading && <Preloader/>}
     </>

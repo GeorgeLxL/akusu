@@ -144,6 +144,7 @@ class AddNewEvent extends Component{
         return(
             <>
                 <div className="container">
+                    <div className="container-main">
                     <Header pageName="セミナー・イベント追加" />
                     <div className="seminar-card-container">
                         <div className="seminar-card seminar-detail-card">
@@ -319,6 +320,7 @@ class AddNewEvent extends Component{
                         </div>
                     </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading && <Preloader/>}
                 

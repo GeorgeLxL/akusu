@@ -151,6 +151,7 @@ class ChangePassword extends Component{
         return(
             <>
                 <div className="container">
+                    <div className="container-main">
                     <Header pageName={eval(language).change_password}/>
                     <div className="profile-content">
                             <form onSubmit={this.handleSubmit}>
@@ -188,6 +189,7 @@ class ChangePassword extends Component{
                             </form>
                         </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading &&
                     <Preloader/>

@@ -43,23 +43,25 @@ class Mypage extends Component{
         const {language} = this.state
         return(
             <div className="container">
-                <Header pageName={eval(language).mypage}/>
-                <div className="seminar-card-container">
-                    <div className="seminar-card">
-                        <h3>{eval(language).common}</h3>
-                        <div onClick={(e)=>{window.location.assign("/setProfile")}} className="mypage-link"><a>{eval(language).account_setting}<span>{eval(language).account_setting_description}</span></a></div>
+                <div className="container-main">
+                    <Header pageName={eval(language).mypage}/>
+                    <div className="seminar-card-container">
+                        <div className="seminar-card">
+                            <h3>{eval(language).common}</h3>
+                            <div onClick={(e)=>{window.location.assign("/setProfile")}} className="mypage-link"><a>{eval(language).account_setting}<span>{eval(language).account_setting_description}</span></a></div>
+                        </div>
+                        <div className="seminar-card">
+                            <h3>{eval(language).notify}</h3>
+                            <div onClick={(e)=>{window.location.assign("/comingsoon")}} className="mypage-link"><a>{eval(language).notification}</a></div>
+                            <div onClick={(e)=>{window.location.assign("/comingsoon")}} className="mypage-link"><a>{eval(language).mail_delivery}</a></div>
+                        </div>
+                        <div className="seminar-card">
+                            <h3>{eval(language).others}</h3>
+                            <div onClick={this.handleLogout} className="mypage-link"><a>{eval(language).logout}</a></div>
+                        </div>
                     </div>
-                    <div className="seminar-card">
-                        <h3>{eval(language).notify}</h3>
-                        <div onClick={(e)=>{window.location.assign("/comingsoon")}} className="mypage-link"><a>{eval(language).notification}</a></div>
-                        <div onClick={(e)=>{window.location.assign("/comingsoon")}} className="mypage-link"><a>{eval(language).mail_delivery}</a></div>
-                    </div>
-                    <div className="seminar-card">
-                        <h3>{eval(language).others}</h3>
-                        <div onClick={this.handleLogout} className="mypage-link"><a>{eval(language).logout}</a></div>
-                    </div>
+                    <Footer/>
                 </div>
-                <Footer/>
             </div>
         )
     }

@@ -65,25 +65,25 @@ class SendPoint extends Component{
     handlChangeSendPoint =  e =>{
         this.setState({
             sendpoint: (e.target.value.replace(/,/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-            receivepoint: (parseInt(e.target.value.replace(/,/g, "")) * 0.973).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            receivepoint: (parseInt(e.target.value.replace(/,/g, "")) * 0.9725).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
         if (parseInt(e.target.value.replace(/,/g, "")) > parseInt(this.state.totalPoint)) {
             this.setState({
                 sendpoint: (this.state.totalPoint).replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-                receivepoint: (parseInt(this.state.totalPoint) * 0.973).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                receivepoint: (parseInt(this.state.totalPoint) * 0.9725).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             });
         }
     }
 
     handleChangeReceive =  e =>{
         this.setState({
-           sendpoint: (parseInt(e.target.value.replace(/,/g, "")) / 0.973).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+           sendpoint: (parseInt(e.target.value.replace(/,/g, "")) / 0.9725).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
            receivepoint: (e.target.value.replace(/,/g, "")).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-        if (parseInt(e.target.value.replace(/,/g, "")) > parseInt(parseInt(this.state.totalPoint) * 0.973)) {
+        if (parseInt(e.target.value.replace(/,/g, "")) > parseInt(parseInt(this.state.totalPoint) * 0.9725)) {
             this.setState({
                 sendpoint: (this.state.totalPoint).replace(/\B(?=(\d{3})+(?!\d))/g, ",") ,
-                receivepoint: (parseInt(this.state.totalPoint) *.973).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                receivepoint: (parseInt(this.state.totalPoint) * 0.9725).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             });
         }
     }
@@ -95,7 +95,7 @@ class SendPoint extends Component{
     
     handleReceiveKeyPress = e => {
         
-        if (parseFloat(this.state.value1 / 0.973) > parseFloat(this.state.totalPoint)) this.setState({value1: (parseInt(this.state.totalPoint * 0.973)).toString()})
+        if (parseFloat(this.state.value1 / 0.9725) > parseFloat(this.state.totalPoint)) this.setState({value1: (parseInt(this.state.totalPoint * 0.9725)).toString()})
     }
 
     handleChange = filedName => e=>{
@@ -175,6 +175,7 @@ class SendPoint extends Component{
         return(
             <>
                 <div className="container">
+                    <div className="container-main">
                     <Header pageName="ポイント送信"/>
                         <div className="seminar-card seminar-detail-card">
                         <h2 style={{marginBottom: '1em'}}>現在の保有ポイント : {totalPoint}</h2>
@@ -184,7 +185,7 @@ class SendPoint extends Component{
                                     <h3>受信者メールアドレス</h3>
                                 </div>
                                 <div className="profile-input-container">
-                                    <input style={{width:'100%'}} className="profile-input-input profile-input-input1" type="email" value={email} onChange={this.handleChange("email")} />
+                                    <input style={{width:'100%'}} className="profile-input-input" type="email" value={email} onChange={this.handleChange("email")} />
                                 </div>
                                 <span className="error">{error_receptance}</span>
                             </div>
@@ -211,6 +212,7 @@ class SendPoint extends Component{
                             </form>
                         </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading && <Preloader/> }
             </>

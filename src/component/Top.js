@@ -125,6 +125,7 @@ class Top extends Component{
         return(
             <>
                 <div className="container container1">
+                    <div className="container-main">
                     <div className="main-title">
                         <img src="./assets/image/logo.png" alt="" />
                     </div>
@@ -143,6 +144,7 @@ class Top extends Component{
                                 <option value="en">{eval(language).english}</option>
                             </select>
                         </div>
+                    </div>
                     </div>
                 </div>
                 {/* <div className="theme-select">

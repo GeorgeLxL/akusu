@@ -63,7 +63,8 @@ class EventDetail extends Component{
         return(
             <>
                 <div className="container">
-                   <Header pageName="セミナー・イベント詳細"/>
+                    <div className="container-main">
+                    <Header pageName="セミナー・イベント詳細"/>
                     <div className="seminar-card-container">
                         <div className="seminar-card seminar-detail-card">
                             <h2>{detailevent.fields.title}</h2>
@@ -152,6 +153,7 @@ class EventDetail extends Component{
                         </div>
                     </div>
                     <Footer/>
+                    </div>
                 </div>
                 {loading &&
                     <Preloader/>
