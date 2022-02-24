@@ -72,19 +72,19 @@ class ChangeEmail extends Component{
     handleSubmit = (e) =>{
         e.preventDefault();
         const {currentEmail, passWord, newEmail} = this.state
-        if (currentEmail=='') {
+        if (currentEmail==='') {
             this.setState({
                 error: '※必須項目が未入力です。'
             })
             return;
         }
-        if (passWord=='') {
+        if (passWord==='') {
             this.setState({
                 error: '※必須項目が未入力です。'
             })
             return;
         }
-        if (newEmail=='') {
+        if (newEmail==='') {
             this.setState({
                 error: '※必須項目が未入力です。'
             })
@@ -113,19 +113,19 @@ class ChangeEmail extends Component{
         .catch((error)=>{
             this.setState({loading:false});
             if (error.response) {
-                if (error.response.data.error=='email') {
+                if (error.response.data.error==='email') {
                     this.setState({
                         error: '現在のメールが正確ではありません。',
                     })
                     return;
                 }
-                if (error.response.data.error=='password') {
+                if (error.response.data.error==='password') {
                     this.setState({
                         error: 'パスワードが正しくありません。',
                     })
                     return;
                 }
-                if (error.response.data.error=='newemail') {
+                if (error.response.data.error==='newemail') {
                     this.setState({
                         error: 'そのメールを利用するユーザーがすでに存在しています。',
                     })

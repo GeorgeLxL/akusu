@@ -27,7 +27,7 @@ const jp ={
     user_type:"会員種類",
     points:"保有ポイント",
     store:"店舗売買",
-    usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C'],
+    usertypes:['個人会員', 'ビジネス利用', '運営者', '紹介者A', '紹介者B','紹介者C'],
     buy_title:"物件を買いたい人",
     name:"氏名",
     phone_number:"電話番号",

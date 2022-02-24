@@ -31,7 +31,7 @@ const jp ={
     user_name:"ユーザー名",
     user_type:"会員種類",
     points:"保有ポイント",
-    usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C'],
+    usertypes:['個人会員', 'ビジネス利用', '運営者', '紹介者A', '紹介者B','紹介者C'],
     invite:"友達紹介",
     send:"保存する",
     intro:"友達紹介",
@@ -49,8 +49,7 @@ class Invite extends Component{
             userPoint:0,
             avartar:"",
             language:JSON.parse(localStorage.language).language,
-            userPoint:"",
-            invite: false,
+            invite: true,
             referalcode: '',
             emailModal: false,
             copied: false,
@@ -91,7 +90,6 @@ class Invite extends Component{
         .then((response) => {
             var userData = response.data.user;
             var srcBase64 = userData.userAvatar;
-            if (userData.invite) window.location.assign('/home')
             this.setState({
                 loading:false,
                 userName: userData.userName,
@@ -99,7 +97,7 @@ class Invite extends Component{
                 userPoint: userData.userPoint,
                 avartar: srcBase64,
                 invite: userData.invite,
-                referalcode:(userData.referalcode=='null' || userData.referalcode==null)?'':userData.referalcode,
+                referalcode:(userData.referalcode==='null' || userData.referalcode===null)?'':userData.referalcode,
             })
         })
         .catch((error)=>{
@@ -152,7 +150,12 @@ class Invite extends Component{
                         </table>
                     </div>
                     <div className="invite-container">
-                        <h3>友達を招待して、<br />10ポイントを確実にゲットしよう！</h3>
+                        {
+                            this.state.invite?
+                            <></>
+                            :
+                            <h3>友達を招待して、<br />50ポイントを確実にゲットしよう！</h3>
+                        }
                         <p>招待コード：<span className={copied?"copied":""} onClick={this.codeCopy} >{referalcode}</span></p>
                         <h3>友達を招待する方法</h3>
                         <div>

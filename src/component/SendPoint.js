@@ -196,11 +196,11 @@ class SendPoint extends Component{
                                 <div className="time-input-container">
                                     <div className="time-input-box">
                                         <label >送信ポイント</label>
-                                        <input type="text" value={sendpoint == 'NaN'? '': sendpoint} onChange={this.handlChangeSendPoint} />
+                                        <input type="text" value={sendpoint === 'NaN'? '': sendpoint} onChange={this.handlChangeSendPoint} />
                                     </div>
                                     <div className="time-input-box">
                                         <label >受け取りポイント</label>
-                                        <input type="text" value={receivepoint == 'NaN'? '': receivepoint} onChange={this.handleChangeReceive} />
+                                        <input type="text" value={receivepoint === 'NaN'? '': receivepoint} onChange={this.handleChangeReceive} />
                                     </div>
                                 </div>
                                 <span className="error">{error_point}</span>

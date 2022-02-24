@@ -45,7 +45,6 @@ class Footer extends Component{
         };
         axios(config)
         .then((response) => {
-            console.log(JSON.parse(response.data.notifications));
             this.setState({
                 notificationcount:response.data.count,
                 notifications:JSON.parse(response.data.notifications),

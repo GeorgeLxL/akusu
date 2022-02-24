@@ -26,7 +26,7 @@ const jp ={
     user_type:"会員種類",
     points:"保有ポイント",
     store:"店舗売買",
-    usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C'],
+    usertypes:['個人会員', 'ビジネス利用', '運営者', '紹介者A', '紹介者B','紹介者C'],
     property_list:"物件<br />一覧",
 }
 
@@ -133,10 +133,10 @@ class StoreDetail extends Component{
                 </div>
                 <div className="real-container1">
                     <div className="real-detail-link">
-                        <a href="/store/company/list" className={activeTab=="list" ? "current" : ""}>物件<br />一覧</a>
-                        <a href="/store/company/sale" className={activeTab=="sale" ? "current" : ""}>物件を<br />売る</a>
-                        <a href="/store/company/buy" className={activeTab=="buy" ? "current" : ""}>物件を<br />買う</a>
-                        <a href="/store/company/guide" className={activeTab=="guide" ? "current" : ""}>初めての<br />方へ</a>
+                        <a href="/store/company/list" className={activeTab==="list" ? "current" : ""}>物件<br />一覧</a>
+                        <a href="/store/company/sale" className={activeTab==="sale" ? "current" : ""}>物件を<br />売る</a>
+                        <a href="/store/company/buy" className={activeTab==="buy" ? "current" : ""}>物件を<br />買う</a>
+                        <a href="/store/company/guide" className={activeTab==="guide" ? "current" : ""}>初めての<br />方へ</a>
                     </div>
                 </div>
                 <Switch>

@@ -178,19 +178,19 @@ class ApplyEvent extends Component{
                             </div>
                             <div className="seminar-detail-desc">
                                 <p>{detailevent.fields.location_way}<br/>
-                                    {detailevent.fields.location_detail_link !=="" && <a target="_blank" className="seminar-detail-link" href={detailevent.fields.location_detail_link}>{detailevent.fields.location_detail_link}</a>}
+                                    {detailevent.fields.location_detail_link !=="" && <a target="_blank" rel="noreferrer noopener" className="seminar-detail-link" href={detailevent.fields.location_detail_link}>{detailevent.fields.location_detail_link}</a>}
                                 </p>
                             </div>
                         </div>
                         <div className="seminar-card">
                             <h3>参加枠</h3>
                             <div className="seminar-part-type">
-                                <div onClick={(e)=>{this.setState({type:"normal"})}} className={this.state.type=="normal" ? "seminar-part-type-detail seminar-part-type-focused" :"seminar-part-type-detail"}>
+                                <div onClick={(e)=>{this.setState({type:"normal"})}} className={this.state.type==="normal" ? "seminar-part-type-detail seminar-part-type-focused" :"seminar-part-type-detail"}>
                                     <div><div></div></div>
                                     <div>一般参加枠：{detailevent.fields.fee}円</div>
                                     <div></div>
                                 </div>
-                                <div onClick={(e)=>{this.setState({type:"member"})}} className={this.state.type=="member" ? "seminar-part-type-detail seminar-part-type-focused" :"seminar-part-type-detail"}>
+                                <div onClick={(e)=>{this.setState({type:"member"})}} className={this.state.type==="member" ? "seminar-part-type-detail seminar-part-type-focused" :"seminar-part-type-detail"}>
                                     <div><div></div></div>
                                     <div>会員：0円</div>
                                 </div>

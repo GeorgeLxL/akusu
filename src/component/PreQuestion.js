@@ -75,7 +75,9 @@ class PreQuestion extends Component{
         .then((response) => {
             if (response.data.prequestion) {
                 var prequestion = JSON.parse(response.data.prequestion)[0]
-                console.log(prequestion)
+                if (response.data.count == 1) {
+                    window.location.assign('/home')
+                }
                 this.setState({
                     business: prequestion.fields.business,
                     realEstate: prequestion.fields.realEstate,

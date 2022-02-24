@@ -3,12 +3,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Preloader from './Layout/preloader';
-import { 
-    Button,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
+import {
     Slide,
 } from '@material-ui/core';
 
@@ -119,7 +114,7 @@ class ForgotPassword extends Component{
             this.setState({
                 loading:false
             });
-            if (error.response.data.email == 'False') {
+            if (error.response.data.email === 'False') {
                 this.setState({
                     erroremail: 'メールが正確ではありません。',
                 })

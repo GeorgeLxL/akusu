@@ -22,6 +22,7 @@ function App() {
       <SafeAreaProvider>
       <SafeAreaView edges={['top', 'left', 'right', 'bottom']}>
         <AppContext.Provider value={projectSettings}>
+          <div className='particles-container'>
           <Particles
             params={{
               "particles":{
@@ -142,8 +143,9 @@ function App() {
                 "resize":true              //canvasのサイズにあらせて変更する
             }}
           />
+          </div>
           <div className='main-logo'>
-          <img src="/assets/image/logo.png" />
+          <img src="/assets/image/logo.png" alt="main background logo"/>
           </div>
           <Routes />
         </AppContext.Provider>

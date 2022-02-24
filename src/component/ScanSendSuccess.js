@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import Preloader from './Layout/preloader';
-import axios from 'axios';
 import Footer from './Layout/footer';
 import Header from './Layout/header';
-
-const baseurl = process.env.REACT_APP_API_BASE_URL;
 
 function ScanSendSuccess() {
 

@@ -41,7 +41,7 @@ const jp ={
     save:"貯める",
     charge:"チャージ",
     owned_point:"保有ポイント：",
-    usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C']
+    usertypes:['個人会員', 'ビジネス利用', '運営者', '紹介者A', '紹介者B','紹介者C']
 }
 
 class Home extends Component{   
@@ -56,7 +56,10 @@ class Home extends Component{
            newEventNum:0,
            invite: false,
            language:JSON.parse(localStorage.language).language,
-           email: JSON.parse(localStorage.getItem('userData')).email
+           email: JSON.parse(localStorage.getItem('userData')).email,
+           preQuestion: true,
+           personals: 0,
+           businesses: 0,
         }
     }
 
@@ -96,6 +99,9 @@ class Home extends Component{
                 userPoint: userData.userPoint,
                 avartar: srcBase64,
                 invite: userData.invite,
+                preQuestion: userData.preQuestion,
+                personals: response.data.personals,
+                businesses: response.data.businesses,
             })
         })
         .catch((error)=>{
@@ -112,12 +118,12 @@ class Home extends Component{
     }
 
     render(){  
-        const {loading, language, userName, userPoint, userType, avartar, newEventNum, email, invite} = this.state
+        const {loading, language, userName, userPoint, userType, avartar, newEventNum, email, invite, preQuestion, personals, businesses} = this.state
         return(
         <>
             <div className="container">
                 <div className='container-main'>
-                <Header notback={true} Intro={invite} pageName={eval(language).home}/>
+                <Header notback={true} Intro={true} pageName={eval(language).home}/>
                 <div className="top-profile">
                     <div className="top-profile-img">
                         <img src={avartar ? `${baseurl}/media/${avartar}`: './assets/image/avatar.svg'} alt="" />
@@ -140,8 +146,17 @@ class Home extends Component{
                     </table>
                 </div>
                 <div className="top-content-spec top-main-link">
-                    <div className="top-step-link">
-                        <a href="/prequestion">ビジネススタート事前登録</a>
+                    {
+                        preQuestion?
+                        <></>
+                        :
+                        <div className="top-step-link">
+                            <a href="/prequestion">ビジネススタート事前登録</a>
+                        </div>
+                    }
+                    <div className='top-content-numbers'>
+                        <p>個人会員数：{personals}</p>
+                        <p>ビジネス利用数：{businesses}</p>
                     </div>
                     <div className="top-link-container">
                         <div className="top-link">

@@ -53,13 +53,7 @@ class Header extends Component{
                             <path fillRule="evenodd" clipRule="evenodd" d="M10.0401 20.5802L0.790059 11.45C0.400059 11.06 0.400059 10.4401 0.790059 10.0501L10.0401 0.92C10.6001 0.36 11.51 0.36 12.08 0.92C12.64 1.47 12.64 2.38001 12.08 2.93001L4.17006 10.7501L12.08 18.5701C12.64 19.1201 12.64 20.0302 12.08 20.5802C11.51 21.1402 10.6001 21.1402 10.0401 20.5802Z" fill="#6F738D"/>
                         </svg>
                     </button>}
-                    {   this.props.Intro==null?
-                        ""
-                        :
-                        this.props.Intro==false?
-                        <a className="introduce" href="/invite">{eval(language).intro}</a>
-                        :
-                        ""
+                    {   this.props.Intro && <a className="introduce" href="/invite">{eval(language).intro}</a>
                     }
                     <h3>{this.props.pageName}</h3>
                     <div className={this.state.toggle ? "menu_icon change" : "menu_icon"} onClick={this.menu_click}>

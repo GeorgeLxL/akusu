@@ -22,7 +22,7 @@ function Scan() {
         var email = userData.email
         setValue(email.toString())
         getUserdata()
-        const interval = setInterval(() => getScanStatus(), 2000);
+        const interval = setInterval(() => getScanStatus(), 3000);
         return () => clearInterval(interval)
     },[])
 
@@ -67,10 +67,11 @@ function Scan() {
         };
         axios(config)
         .then((response) => {
-            if (response.data.scanStatus==1) {
+            console.log(response.data)
+            if (response.data.scanStatus===1 && response.data.sender !== null && response.data.senderID !== null && response.data.point !== null) {
                 history.push({
                     pathname: '/scan/receive_success',
-                    status: {
+                    state: {
                         sender: response.data.sender,
                         senderID: response.data.senderID,
                         point: response.data.point

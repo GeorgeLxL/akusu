@@ -146,10 +146,10 @@ class EventDetail extends Component{
                             </div>
                             <div className="seminar-detail-desc">
                                 <p>{detailevent.fields.location_way}<br/>
-                                    {detailevent.fields.location_detail_link !=="" && <a target="_blank" className="seminar-detail-link" href={detailevent.fields.location_detail_link}>{detailevent.fields.location_detail_link}</a>}
+                                    {detailevent.fields.location_detail_link !=="" && <a target="_blank" rel="noreferrer noopener" className="seminar-detail-link" href={detailevent.fields.location_detail_link}>{detailevent.fields.location_detail_link}</a>}
                                 </p>
                             </div>
-                            {detailevent.fields.location_map_link !=="" && <iframe src={detailevent.fields.location_map_link} style={{border:0}} allowfullscreend="true" loading="lazy"></iframe>}
+                            {detailevent.fields.location_map_link !=="" && <iframe src={detailevent.fields.location_map_link} style={{border:0}} title="eventDetailIframe" allowfullscreend="true" loading="lazy"></iframe>}
                         </div>
                     </div>
                     <Footer/>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import Preloader from './Layout/preloader';
@@ -11,17 +11,39 @@ const baseurl = process.env.REACT_APP_API_BASE_URL;
 function ScanReceiveSuccess() {
 
     const location = useLocation();
-    const point = location.state?.point
-    const sender = location.state?.sender
-    const senderID = location.state?.senderID
+    return(
+        <ScanReceiveSuccessView location = {location} />
+    )
+}
 
-    const [loading, setLoading] = useState(false);
+class ScanReceiveSuccessView extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            verifyCode:"",
+            loading:false,
+            error_verificationcode:"",
+            point: '',
+            sender: '',
+            senderID: '',
+        }
+    }
+    
 
-    useEffect(()=>{
-        setScanStatus();
-    },[])
+    componentDidMount() {
+        const point1 = this.props.location.state?.point
+        const sender1 = this.props.location.state?.sender
+        const senderID1 = this.props.location.state?.senderID
+        this.setState({
+            point: point1,
+            sender: sender1,
+            senderID: senderID1
+        })
+        console.log(point1, sender1, senderID1)
+        this.setScanStatus(senderID1);
+    }
 
-    const setScanStatus = () => {
+    setScanStatus = (senderID) => {
         var userData = JSON.parse(localStorage.userData);
         var token = userData.token
         var data = JSON.stringify({'sender': senderID})
@@ -38,7 +60,7 @@ function ScanReceiveSuccess() {
         .then((response) => {
         })
         .catch((error)=>{
-            setLoading(false)
+            this.setState({loading: false})
             if (error.response) {
                 if(error.response.status===401){
                     localStorage.removeItem("userData");
@@ -48,37 +70,46 @@ function ScanReceiveSuccess() {
         })
     }
 
-    return(
-        <>
-            <div className="container">
-                <div className="container-main">
-                <Header pageName="成功"/>
-                    <div className="seminar-detail-card">
-                        <div className='scan'>
-                            <h2>ポイントを受信しました。</h2>
-                            <div className='scan-table'>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>受け取りポイント</td>
-                                            <td> : {point}pt</td>
-                                        </tr>
-                                        <tr>
-                                            <td>送信元</td>
-                                            <td> : {sender}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+    render() {
+        const {
+            senderID,
+            point,
+            sender,
+            loading
+        } = this.state
+        return(
+            <>
+                <div className="container">
+                    <div className="container-main">
+                    <Header pageName="成功"/>
+                        <div className="seminar-detail-card">
+                            <div className='scan'>
+                                <h2>ポイントを受信しました。</h2>
+                                <p>{point}ポイントのうち決済手数料(2.75%)を引いて{parseInt(parseInt(point) * 0.9725)}ポイントを受け取りました。</p>
+                                <div className='scan-table'>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>受け取りポイント</td>
+                                                <td> : {parseInt(parseInt(point) * 0.9725)}pt</td>
+                                            </tr>
+                                            <tr>
+                                                <td>送信元</td>
+                                                <td> : {sender}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <Link to="/home">トップページ</Link>
                             </div>
-                            <Link to="/home">トップページ</Link>
                         </div>
+                    <Footer/>
                     </div>
-                <Footer/>
                 </div>
-            </div>
-            {loading && <Preloader/> }
-        </>
-    )
+                {loading && <Preloader/> }
+            </>
+        )
+    }
 }
 
 export default ScanReceiveSuccess;

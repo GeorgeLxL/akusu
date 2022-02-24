@@ -43,13 +43,18 @@ input, select {
     font-size: inherit;
 }
 
-#tsparticles {
+.particles-container {
     position: absolute;
     z-index: -1;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    padding: inherit;
+}
+
+#tsparticles {
+    height: 100%;
     background-image: linear-gradient(to bottom, #2f5576, #484777);
 }
 
@@ -373,6 +378,17 @@ input, select {
 .top-content-spec {
     padding: 0 30px;
 }
+.top-content-numbers {
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.top-content-numbers p {
+    margin: 0 1em 1em;
+}
 .top-link-container {
     display: flex;
     flex-wrap: wrap;
@@ -419,6 +435,9 @@ input, select {
     font-size: 12px;
     line-height: 1.8;
 }
+.top-step-link {
+    margin-bottom: 30px;
+}
 .top-step-link a {
     display: flex;
     justify-content: center;
@@ -428,6 +447,29 @@ input, select {
     background-color: #009588;
     color: white;
     font-size: 20px;
+    position: relative;
+}
+.top-step-link a::before {
+    content: '今だけ!';
+    position: absolute;
+    background-color: #ffcc00;
+    color: #2f5576;
+    font-weight: bold;
+    font-size: .8em;
+    padding: .1em .5em .2em;
+    border-radius: 50%;
+    left: -1em;
+    top: -1em;
+    transform: rotate(-5deg);
+}
+.top-step-link a::after {
+    position: absolute;
+    content: '登録完了をすると100ptプレゼント！';
+    font-size: .7em;
+    top: 0;
+    transform: translate(10%, -50%);
+    font-weight: bold;
+    text-shadow: 2px 2px black;
 }
 .top-profile {
     background-color: #7FA835;
@@ -2858,9 +2900,12 @@ iframe {
     justify-content: center;
     align-items: center;
     margin-top: 1em;
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: bold;
     text-align: left;
+}
+.scan p {
+    margin-top: 2em;
 }
 .error-hissu {
     text-align: center;

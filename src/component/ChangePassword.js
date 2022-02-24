@@ -80,25 +80,25 @@ class ChangePassword extends Component{
     handleSubmit = (e) =>{
         e.preventDefault();
         const {email, password, newPassword, confirmPassword} = this.state
-        if (email=='') {
+        if (email==='') {
             this.setState({
                 error: '※必須項目が未入力です。'
             })
             return
         }
-        if (password=='') {
+        if (password==='') {
             this.setState({
                 error: '※必須項目が未入力です。'
             })
             return
         }
-        if (newPassword=='') {
+        if (newPassword==='') {
             this.setState({
                 error: '※必須項目が未入力です。'
             })
             return
         }
-        if (newPassword!=confirmPassword) {
+        if (newPassword!==confirmPassword) {
             this.setState({
                 error: 'パスワードが一致しません。'
             })
@@ -126,13 +126,13 @@ class ChangePassword extends Component{
         .catch((error)=>{
             this.setState({loading:false});
             if (error.response) {
-                if (error.response.data.error=='email') {
+                if (error.response.data.error==='email') {
                     this.setState({
                         error: '現在のメールが正確ではありません。',
                     })
                     return;
                 }
-                if (error.response.data.error=='password') {
+                if (error.response.data.error==='password') {
                     this.setState({
                         error: 'パスワードが正しくありません。',
                     })

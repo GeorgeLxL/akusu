@@ -38,6 +38,7 @@ class EmailVerifyView extends Component{
 
     handleSubmit = e =>{
         e.preventDefault();
+        this.setState({loading:true});
         var data = JSON.stringify({email: this.state.email, code:this.state.verifyCode});
         var config = {
             method: 'POST',
@@ -88,30 +89,34 @@ class EmailVerifyView extends Component{
     }
   
     render(){
-       
         return(
-            <div className="container">
-                <div className="container-main">
-                <div className="seminar-card seminar-detail-card">
-                    <form onSubmit={this.handleSubmit}>
-                            <div className="profile-input-box">
-                                <div className="profile-title">
-                                    <h3>検証コード</h3>
+            <>
+                <div className="container">
+                    <div className="container-main">
+                    <div className="seminar-card seminar-detail-card">
+                        <form onSubmit={this.handleSubmit}>
+                                <div className="profile-input-box">
+                                    <div className="profile-title">
+                                        <h3>検証コード</h3>
+                                    </div>
+                                    <div className="profile-input-container">
+                                        <input style={{width:'100%'}} className="profile-input-input" type="number" value={this.state.verifyCode}  onChange={this.handleChange("verifyCode")} />
+                                    </div>
+                                    <span className="error">{this.state.error_verificationcode}</span>
                                 </div>
-                                <div className="profile-input-container">
-                                    <input style={{width:'100%'}} className="profile-input-input" type="number" value={this.state.verifyCode}  onChange={this.handleChange("verifyCode")} />
+                        
+                                <div className="profile-input-upload event-input-upload">
+                                    <button type="submit">確認</button><br/>
+                                    <button onClick={this.handleResendCode} type="button">再送信</button>
                                 </div>
-                                <span className="error">{this.state.error_verificationcode}</span>
-                            </div>
-                    
-                            <div className="profile-input-upload event-input-upload">
-                                <button type="submit">確認</button><br/>
-                                <button onClick={this.handleResendCode} type="button">再送信</button>
-                            </div>
-                    </form>
+                        </form>
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
+                {
+                    this.state.loading && <Preloader />
+                }
+            </>
         )
     }
 }

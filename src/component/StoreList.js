@@ -24,7 +24,7 @@ const jp ={
     user_type:"会員種類",
     points:"保有ポイント",
     store:"店舗売買",
-    usertypes:['個人会員', '企業', '運営者', '紹介者A', '紹介者B','紹介者C'],
+    usertypes:['個人会員', 'ビジネス利用', '運営者', '紹介者A', '紹介者B','紹介者C'],
     property_list:"物件一覧",
     featured_property:"注目物件!!"
 }
@@ -63,11 +63,11 @@ class StoreList extends Component{
         var i,j;
         var swiper = document.querySelectorAll(".swiper-container .swiper-slide")
         for (i=0;i<swiper.length-1;i++) {
-            if (swiper[i].innerHTML == swiper[i+1].innerHTML) {
+            if (swiper[i].innerHTML === swiper[i+1].innerHTML) {
                 j=1;
             }
         }
-        if(j==1) {
+        if(j===1) {
             document.querySelector('.swiper-wrapper').classList.add('disabled');
             document.querySelector('.swiper-button-prev').classList.add('disabled');
             document.querySelector('.swiper-button-next').classList.add('disabled');
