@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { QRCode } from 'react-qrcode-logo';
+import { 
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    Slide,
+} from '@material-ui/core';
 
 import Preloader from './Layout/preloader';
 import axios from 'axios';
@@ -13,18 +21,30 @@ function Scan() {
 
     const history = useHistory();
 
+    const audio = new Audio('/assets/sound/sound.mp3')
+
     const [loading, setLoading] = useState(false);
     const [totalPoint, settotalPoint] = useState(0);
     const [value, setValue] = useState('');
+    const [sender, setSender] = useState('');
+    const [senderID, setSenderID] = useState('');
+    const [point, setPoint] = useState('');
+    const [successModal, setSuccessModal] = useState(false);
+
+    const interval = useRef()
 
     useEffect(()=>{
+        if (point!=='') {
+            return;
+        }
         var userData = JSON.parse(localStorage.userData);
         var email = userData.email
         setValue(email.toString())
         getUserdata()
-        const interval = setInterval(() => getScanStatus(), 3000);
-        return () => clearInterval(interval)
-    },[])
+        
+        interval.current = setInterval(() => getScanStatus(), 3000);
+        return () => clearInterval(interval.current)
+    },[point])
 
     const getUserdata = () => {
         var userData = JSON.parse(localStorage.userData);
@@ -69,14 +89,12 @@ function Scan() {
         .then((response) => {
             console.log(response.data)
             if (response.data.scanStatus===1 && response.data.sender !== null && response.data.senderID !== null && response.data.point !== null) {
-                history.push({
-                    pathname: '/scan/receive_success',
-                    state: {
-                        sender: response.data.sender,
-                        senderID: response.data.senderID,
-                        point: response.data.point
-                    }
-                })
+                setSender(response.data.sender)
+                setSenderID(response.data.senderID)
+                setPoint(response.data.point)
+                setSuccessModal(true)
+                audio.load()
+                playAudio()
             }
         })
         .catch((error)=>{
@@ -86,6 +104,30 @@ function Scan() {
                     localStorage.removeItem("userData");
                     window.location.assign('/');
                 }
+            }
+        })
+    }
+
+    const playAudio = () => {
+        const audioPromise = audio.play()
+        if (audioPromise !== undefined) {
+            audioPromise
+                .then(_ => {
+                    console.log('play')
+                })
+                .catch(err => {
+                    console.info(err)
+                })
+        }
+    }
+
+    const successModalClose = e => {
+        history.push({
+            pathname: '/scan/receive_success',
+            state: {
+                sender: sender,
+                senderID: senderID,
+                point: point
             }
         })
     }
@@ -108,6 +150,15 @@ function Scan() {
                 <Footer/>
                 </div>
             </div>
+            <Dialog
+                open={successModal}
+                onClose={()=>successModalClose()}
+            >
+                <DialogContent>
+                    <DialogContentText style={{textAlign: 'center'}}>ポイントを受理しました。</DialogContentText>
+                </DialogContent>
+                <a style = {{textAlign: 'center', fontSize: '20px', height: '2em', display: 'block', color: '#3f64ee'}} onClick={()=>successModalClose()}>OK</a>
+            </Dialog>
             {loading && <Preloader/> }
         </>
     )

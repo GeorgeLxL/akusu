@@ -39,7 +39,6 @@ class ScanReceiveSuccessView extends Component {
             sender: sender1,
             senderID: senderID1
         })
-        console.log(point1, sender1, senderID1)
         this.setScanStatus(senderID1);
     }
 

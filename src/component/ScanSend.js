@@ -43,12 +43,12 @@ function ScanSend() {
                             </div>
                             <span className="error">{errorReceiver}</span>
                             <Link to="/scan">バーコードで送受信</Link>
-                            <button onClick={()=>history.push({
+                            {/* <button onClick={()=>history.push({
                                 pathname: 'send_amount',
                                 state: {
                                     email: 'geolxl@hotmail.com'
                                 },
-                            })}>aaa</button>
+                            })}>aaa</button> */}
                         </div>
                     </div>
                 <Footer/>
