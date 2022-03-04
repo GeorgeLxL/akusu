@@ -6,6 +6,20 @@ import { useLocation } from 'react-router-dom';
 import Preloader from './Layout/preloader'
 const baseurl = process.env.REACT_APP_API_BASE_URL;
 
+const en ={
+    code: 'Confirmation code',
+    confirm: 'Confirm',
+    resend: 'Resend',
+    error_code: 'Confirmation code incorrect',
+}
+
+const jp = {
+    code: '検証コード',
+    confirm: '確認',
+    resend: '再送信',
+    error_code: '確認コードが正しくありません。',
+}
+
 function EmailVerify() {
     const location = useLocation()
     return(
@@ -21,6 +35,7 @@ class EmailVerifyView extends Component{
             loading:false,
             error_verificationcode:"",
             email: '',
+            language: JSON.parse(localStorage.language).language,
         }
     }
 
@@ -37,6 +52,7 @@ class EmailVerifyView extends Component{
     }
 
     handleSubmit = e =>{
+        const {language} = this.state
         e.preventDefault();
         this.setState({loading:true});
         var data = JSON.stringify({email: this.state.email, code:this.state.verifyCode});
@@ -57,7 +73,7 @@ class EmailVerifyView extends Component{
             this.setState({loading:false})
             if (error.response) {
                 if(error.response.status===400) {
-                    this.setState({error_verificationcode:"確認コードが正しくありません。"})
+                    this.setState({error_verificationcode: eval(language).error_code})
                 }
             }
         })   
@@ -89,6 +105,7 @@ class EmailVerifyView extends Component{
     }
   
     render(){
+        const {language} = this.state
         return(
             <>
                 <div className="container">
@@ -97,7 +114,7 @@ class EmailVerifyView extends Component{
                         <form onSubmit={this.handleSubmit}>
                                 <div className="profile-input-box">
                                     <div className="profile-title">
-                                        <h3>検証コード</h3>
+                                        <h3>{eval(language).code}</h3>
                                     </div>
                                     <div className="profile-input-container">
                                         <input style={{width:'100%'}} className="profile-input-input" type="number" value={this.state.verifyCode}  onChange={this.handleChange("verifyCode")} />
@@ -106,8 +123,8 @@ class EmailVerifyView extends Component{
                                 </div>
                         
                                 <div className="profile-input-upload event-input-upload">
-                                    <button type="submit">確認</button><br/>
-                                    <button onClick={this.handleResendCode} type="button">再送信</button>
+                                    <button type="submit">{eval(language).confirm}</button><br/>
+                                    <button onClick={this.handleResendCode} type="button">{eval(language).resend}</button>
                                 </div>
                         </form>
                     </div>

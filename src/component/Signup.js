@@ -26,6 +26,9 @@ const en = {
     duplicate_error:"A user with this email already exists.",
     invalid_email_error:"Enter a valid email address.",
     close:"Close",
+    email_sent: 'Confirmation code sent',
+    confirm_email_sent: 'Confirmation code sent to your email address',
+    confirm_email_sent1: 'Please login after confirmation'
 }
 
 const jp = {
@@ -41,6 +44,9 @@ const jp = {
     duplicate_error:"このメールを持つユーザーはすでに存在します。",
     invalid_email_error:"有効なメールアドレスを入力してください。",
     close:"閉じる",
+    email_sent: '確認コードを送信しました。',
+    confirm_email_sent: '登録したメールアドレスに確認コードを送信しました。',
+    confirm_email_sent1: '確認後、ログインしてください。'
 }
 
 const Transitionalert = React.forwardRef(function Transition(props, ref) {
@@ -210,9 +216,9 @@ class SignupView extends Component{
                     open={successModal}
                     onClose={this.successModalClose}
                 >
-                    <DialogTitle style={{fontWeight: 'bold'}}>確認コードを送信しました。</DialogTitle>
+                    <DialogTitle style={{fontWeight: 'bold'}}>{eval(language).email_sent}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText style={{textAlign: 'center'}}>登録したメールアドレスに確認コードを送信しました。<br />確認後、ログインしてください。</DialogContentText>
+                        <DialogContentText style={{textAlign: 'center'}}>{eval(language).confirm_email_sent}<br />{eval(language).confirm_email_sent1}</DialogContentText>
                     </DialogContent>
                     <a style = {{textAlign: 'center', fontSize: '20px', height: '2em', display: 'block', color: '#3f64ee'}} onClick={this.successModalClose}>OK</a>
                 </Dialog>

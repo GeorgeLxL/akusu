@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import QRScan from 'qrscan';
+import { QrReader } from 'react-qr-reader';
 
 import Preloader from './Layout/preloader';
 import axios from 'axios';
@@ -15,10 +15,17 @@ function ScanSend() {
     const [email, setEmail] = useState('')
     const [errorReceiver, setErrorReceiver] = useState('')
 
-    const handleFind = (value) => {
-        setEmail(value.toString())
-        if(email==="")
+    const handleFind = (result, error) => {
+        
+        if(!!error)
         {
+            setErrorReceiver('受信者のメールアドレスを入力してください。')
+            return;
+        }
+        if (!!result) {
+            setEmail(result?.text);
+        }
+        if (result?.text === '') {
             setErrorReceiver('受信者のメールアドレスを入力してください。')
             return;
         }
@@ -38,8 +45,8 @@ function ScanSend() {
                     <div className="seminar-detail-card">
                         <div className='scan'>
                             <h2>スキャンして送る</h2>
-                            <div className='scan-qrcode-container'>
-                                <QRScan onFind={handleFind} />
+                            <div className='scan-qrcode-container1'>
+                                <QrReader onResult={(result, error)=>handleFind(result, error)} />
                             </div>
                             <span className="error">{errorReceiver}</span>
                             <Link to="/scan">バーコードで送受信</Link>

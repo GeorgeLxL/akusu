@@ -16,7 +16,7 @@ const en = {
     female:"Female",
     male:"Male",
     phone_number:"Phone Number",
-    phone_number_description:"(No half-width number hyphen)",
+    phone_number_description:"(half-width number, no hyphen)",
     birthday:"Birthday",
     avatar:"Avatar",
     avartar_description:"If set, points will be given",
@@ -46,6 +46,9 @@ const en = {
     introducer1:"Introducer A",
     introducer2:"Introducer A",
     introducer3:"Introducer A",
+    mandatory_miss: 'Please input mandatory fields.',
+    referalcode_error: 'Invite code incorrect.',
+    close: 'Close'
 }
 
 const jp ={
@@ -89,6 +92,9 @@ const jp ={
     introducer1:"紹介者A",
     introducer2:"紹介者B",
     introducer3:"紹介者C",
+    mandatory_miss: '※必須項目が未入力です。',
+    referalcode_error: '招待コードが正しくありません。',
+    close: '閉じる',
 }
 
 class ProfileUpdate extends Component{   
@@ -103,7 +109,7 @@ class ProfileUpdate extends Component{
             surnameFurigana:"",
             lastnameFurigana:"",
             maidenname:"",
-            gender:"1",
+            gender: "",
             userType:"0",
             phone:"",
             birthday:"",
@@ -198,7 +204,7 @@ class ProfileUpdate extends Component{
                 surnameFurigana:kana1==null?"":kana1,
                 lastnameFurigana:kana2==null?"":kana2,
                 maidenname:maidenname==null?"":maidenname,
-                gender:gender? `${gender}` : "1",
+                gender:gender? `${gender}` : "",
                 phone:phone==null?"":phone,
                 birthday:birthday==null?"":birthday,
                 address1:address1==null?"":address1,
@@ -233,36 +239,16 @@ class ProfileUpdate extends Component{
         
         var validate = true;
         if(surname==="" || surname==null || lastname==="" || surname==null){
-            this.setState({errorName:eval(language).require_error, error: '※必須項目が未入力です。'})
+            this.setState({errorName:eval(language).require_error, error: eval(language).mandatory_miss})
             validate = false;
         }
         if(surnameFurigana==="" || surnameFurigana===null || lastnameFurigana==="" || lastnameFurigana===null){
-            this.setState({errorFuriganaName:eval(language).require_error, error: '※必須項目が未入力です。'})
+            this.setState({errorFuriganaName:eval(language).require_error, error: eval(language).mandatory_miss})
             validate = false;
         }
         if(phone==="" || phone===null){
-            this.setState({errorPhonNumber:eval(language).require_error, error: '※必須項目が未入力です。'})
+            this.setState({errorPhonNumber:eval(language).require_error, error: eval(language).mandatory_miss})
             validate = false;
-        }
-        if(birthday==="" || birthday===null){
-            this.setState({errorbirthday:eval(language).require_error, error: '※必須項目が未入力です。'})
-            validate = false;
-        }
-        if(address1==="" || address1===null){
-            this.setState({erroraddress1:eval(language).require_error, error: '※必須項目が未入力です。'})
-            validate = false;
-        }
-        if(address2==="" || address2===null){
-            this.setState({erroraddress2:eval(language).require_error, error: '※必須項目が未入力です。'})
-            validate = false;
-        }
-        if(street==="" || street===null){
-            this.setState({errorstreetName:eval(language).require_error, error: '※必須項目が未入力です。'})
-            validate = false;
-        }
-        if(phone=="" || phone==null) {
-            this.setState({errorPhonNumber:eval(language).phone_valid_error, error: '※必須項目が未入力です。'})
-            validate = false
         }
         if(!validate){
             return;
@@ -347,6 +333,7 @@ class ProfileUpdate extends Component{
             userStatus,
             referalCodeModal
         } = this.state
+        console.log(gender)
         return(
             <>
             <div className="container">
@@ -396,7 +383,7 @@ class ProfileUpdate extends Component{
                         </div>
                         <div className="profile-input-box">
                             <div className="profile-title">
-                                <h3>{eval(language).gender}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                <h3>{eval(language).gender}<span className="nini">{eval(language).any}</span></h3>
                             </div>
                             <div className="seminar-part-info-radio">
                                 <label htmlFor="female">
@@ -423,7 +410,7 @@ class ProfileUpdate extends Component{
                         <span className="error">{errorPhonNumber}</span>
                         <div className="profile-input-box">
                             <div className="profile-title">
-                                <h3>{eval(language).birthday}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                <h3>{eval(language).birthday}<span className="nini">{eval(language).any}</span></h3>
                             </div>
                             <div className="profile-input-container">
                                 <input type="date" className="profile-input-input profile-input-input1" name="birthday" value={birthday} onChange={this.handleChangeField("birthday")} placeholder="1986年4月3日" />
@@ -463,7 +450,7 @@ class ProfileUpdate extends Component{
                         <h3 className="profile-input-main-title">{eval(language).address}</h3>
                         <div className="profile-input-box">
                             <div className="profile-title">
-                                <h3>{eval(language).prefectures}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                <h3>{eval(language).prefectures}<span className="nini">{eval(language).any}</span></h3>
                             </div>
                             <div className="profile-input-container">
                                 <input type="text" className="profile-input-input profile-input-input1" name="prefecture" value={address1} onChange={this.handleChangeField("address1")} placeholder="東京都"/>
@@ -472,7 +459,7 @@ class ProfileUpdate extends Component{
                         <span className="error">{erroraddress1}</span>
                         <div className="profile-input-box">
                             <div className="profile-title">
-                                <h3>{eval(language).municipalities}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                <h3>{eval(language).municipalities}<span className="nini">{eval(language).any}</span></h3>
                             </div>
                             <div className="profile-input-container">
                                 <input type="text" className="profile-input-input profile-input-input2" name="municipality" value={address2} onChange={this.handleChangeField("address2")} placeholder="テスト市" />
@@ -481,7 +468,7 @@ class ProfileUpdate extends Component{
                         <span className="error">{erroraddress2}</span>
                         <div className="profile-input-box">
                             <div className="profile-title">
-                                <h3>{eval(language).street_number}<span className="hissu">{eval(language).mandatory}</span></h3>
+                                <h3>{eval(language).street_number}<span className="nini">{eval(language).any}</span></h3>
                             </div>
                             <div className="profile-input-container">
                                 <input type="text" className="profile-input-input profile-input-input2" name="street" value={street} onChange={this.handleChangeField("street")} placeholder="テスト町11" />
@@ -584,8 +571,8 @@ class ProfileUpdate extends Component{
         <div className={`intro-modal ${referalCodeModal?'intro-modal-show':''}`} onClick={()=>this.setState({referalCodeModal: false})}>
             <div className="container">
                 <div className="intro-modal-body" onClick={(e)=>e.stopPropagation()}>
-                    <h3>招待コードが正しくありません。</h3>
-                    <button onClick={()=>this.setState({referalCodeModal: false})}>閉じる</button>
+                    <h3>{eval(language).referalcode_error}</h3>
+                    <button onClick={()=>this.setState({referalCodeModal: false})}>{eval(language).close}</button>
                 </div>
             </div>
         </div>

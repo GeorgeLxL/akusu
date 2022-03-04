@@ -22,7 +22,9 @@ const en = {
     save:"Save",
     charge:"Charge",
     owned_point:"Owned points:",
-    usertypes:['Individual', 'Company', 'Administrator', 'Introducer A', 'Introducer B','Introducer C']
+    usertypes:['Individual', 'Company', 'Administrator', 'Introducer A', 'Introducer B','Introducer C'],
+    individuals: 'Individual users：',
+    corperates: 'Corporate users：',
 }
 
 const jp ={
@@ -41,7 +43,9 @@ const jp ={
     save:"貯める",
     charge:"チャージ",
     owned_point:"保有ポイント：",
-    usertypes:['個人会員', 'ビジネス利用', '運営者', '紹介者A', '紹介者B','紹介者C']
+    usertypes:['個人会員', 'ビジネス利用', '運営者', '紹介者A', '紹介者B','紹介者C'],
+    individuals: '個人会員数：',
+    corperates: 'ビジネス利用数：',
 }
 
 class Home extends Component{   
@@ -155,8 +159,8 @@ class Home extends Component{
                         </div>
                     }
                     <div className='top-content-numbers'>
-                        <p>個人会員数：{personals}</p>
-                        <p>ビジネス利用数：{businesses}</p>
+                        <p>{eval(language).individuals}{personals}</p>
+                        <p>{eval(language).corperates}{businesses}</p>
                     </div>
                     <div className="top-link-container">
                         <div className="top-link">
