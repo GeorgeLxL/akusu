@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { QrReader } from 'react-qr-reader';
+import adapter from 'webrtc-adapter';
 
 import Preloader from './Layout/preloader';
 import axios from 'axios';
